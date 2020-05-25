@@ -8,6 +8,37 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  // mounted() {
+  //   console.log(this.$Media)
+  //   function mediaSuccess(e) {
+  //     console.log(e)
+  //     // console.log('Me123呃呃呃dia成功')
+  //   }
+
+  //   function mediaError(err) {
+  //     console.log(err)
+  //   }
+  //   var src = '1.m4a'
+  //   var mediaRec = new this.$Media(src, mediaSuccess, mediaError)
+  //   // 启动录制音频
+  //   mediaRec.startRecord()
+  //   // 10秒后停止录制
+  //   var recTime = 0
+  //   var recInterval = setInterval(function() {
+  //     recTime = recTime + 1
+  //     if (recTime >= 10) {
+  //       clearInterval(recInterval)
+  //       mediaRec.stopRecord()
+  //       alert('录制完成')
+  //     }
+  //   }, 1000)
+  // },
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
