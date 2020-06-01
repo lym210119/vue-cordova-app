@@ -28,4 +28,6 @@
     <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
         <string>need microphone access to record sounds</string>
 	</edit-config>
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <!-- <preference name="iosPersistentFileLocation" value="Compatibility" /> -->
 </widget>
