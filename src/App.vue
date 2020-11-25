@@ -1,63 +1,71 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <!-- 使用动态的 transition name -->
+    <transition :name="transitionName">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  // mounted() {
-  //   console.log(this.$Media)
-  //   function mediaSuccess(e) {
-  //     console.log(e)
-  //     // console.log('Me123呃呃呃dia成功')
-  //   }
+  data() {
+    return {
+      transitionName: 'slide-left',
+    }
+  },
+  watch: {
+    $route(to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    },
+  },
+  created() {
+    this.$StatusBar.backgroundColorByHexString('#1ab394')
+    //在页面加载时读取sessionStorage里的状态信息
+    if (localStorage.getItem('store')) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(localStorage.getItem('store')),
+        ),
+      )
+    }
 
-  //   function mediaError(err) {
-  //     console.log(err)
-  //   }
-  //   var src = '1.m4a'
-  //   var mediaRec = new this.$Media(src, mediaSuccess, mediaError)
-  //   // 启动录制音频
-  //   mediaRec.startRecord()
-  //   // 10秒后停止录制
-  //   var recTime = 0
-  //   var recInterval = setInterval(function() {
-  //     recTime = recTime + 1
-  //     if (recTime >= 10) {
-  //       clearInterval(recInterval)
-  //       mediaRec.stopRecord()
-  //       alert('录制完成')
-  //     }
-  //   }, 1000)
-  // },
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('store', JSON.stringify(this.$store.state))
+    })
+  },
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.75s ease;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+.child-view {
+  position: absolute;
+  transition: all 0.75s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(30px, 0);
+  transform: translate(30px, 0);
+}
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-30px, 0);
+  transform: translate(-30px, 0);
 }
 </style>

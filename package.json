@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --debug",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
@@ -20,11 +20,14 @@
     "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android",
     "cordova-serve-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-serve-browser",
     "cordova-serve-electron": "cross-env CORDOVA_PLATFORM=electron vue-cli-service cordova-serve-electron",
-    "cordova-serve-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-serve-ios --debug",
+    "cordova-serve-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-serve-ios",
     "cordova-serve-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-serve-osx"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "core-js": "^3.6.4",
+    "fastclick": "^1.0.6",
+    "normalize.css": "^8.0.1",
     "vant": "^2.8.3",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
@@ -42,11 +45,12 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^7.1.0",
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "vconsole-webpack-plugin": "^1.5.1",
+    "terser-webpack-plugin": "^5.0.3",
     "vue-cli-plugin-cordova": "~2.4.1",
     "vue-template-compiler": "^2.6.11"
   }

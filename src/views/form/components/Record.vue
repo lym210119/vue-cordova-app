@@ -40,6 +40,7 @@ export default {
     console.log(this.filePath)
     this.fullPath = this.filePath + this.fileName
     console.log(this.fullPath)
+    this.record()
   },
   methods: {
     mediaSuccess() {

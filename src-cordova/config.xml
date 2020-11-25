@@ -30,4 +30,6 @@
 	</edit-config>
     <preference name="iosPersistentFileLocation" value="Library" />
     <!-- <preference name="iosPersistentFileLocation" value="Compatibility" /> -->
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <!-- <preference name="StatusBarStyle" value="lightContent" /> -->
 </widget>

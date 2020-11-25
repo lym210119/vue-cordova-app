@@ -1,4 +1,4 @@
-const pluginsList = ['cordova-plugin-device']
+const pluginsList = ['cordova-plugin-device', 'cordova-plugin-camera']
 exports.install = (Vue, options) => {
   Vue.cordova = Vue.cordova || {
     deviceready: false,
