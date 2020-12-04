@@ -49,8 +49,14 @@
         </template>
       </van-field>
     </div>
-    <div style="margin: 16px;">
-      <van-button round block type="primary" native-type="button" @click="add">
+    <div style="margin: 16px; text-align: center;">
+      <van-button
+        round
+        type="primary"
+        size="normal"
+        native-type="button"
+        @click="add"
+      >
         添加贷款笔数
       </van-button>
     </div>
@@ -153,12 +159,7 @@ export default {
   },
   data() {
     return {
-      loanArr: [
-        {
-          dkyinhang: '',
-          ifpiguo: '',
-        },
-      ],
+      loanArr: [],
       cxnumArray: [
         { value: 1, name: '2个月小于3次以下' },
         { value: 2, name: '2个月小于5次以下' },
@@ -177,6 +178,7 @@ export default {
   },
   methods: {
     dataFilter(name) {
+      console.log('this.rz: ', this.rz)
       const arr = Object.keys(this.rz)
         .filter(v => {
           return v.indexOf(name) > -1
@@ -193,9 +195,11 @@ export default {
       const phjine = this.dataFilter('phjine')
       const ygjine = this.dataFilter('ygjine')
       const ifOrganization = this.dataFilter('ifOrganization')
+      console.log('ifOrganization: ', ifOrganization)
 
       dkyinhang.forEach((v, i) => {
         if (v['dkyinhang']) {
+          console.log('ifOrganization', ifOrganization[i]['ifOrganization'])
           a[i] = {
             dkyinhang: v['dkyinhang'],
             ifpiguo: ifpiguo[i]['ifpiguo'],
@@ -225,13 +229,17 @@ export default {
       this.loansNum = arr.length !== 0 ? arr.length : 1
     },
     add() {
+      console.log('this.loanArr: ', this.loanArr)
       if (this.loanArr.length >= 5) {
         this.$toast.fail('最多添加5笔贷款')
         return
       }
       const o = {
         dkyinhang: '',
+        ifOrganization: '',
         ifpiguo: '',
+        phjine: '',
+        ygjine: '',
       }
       this.loanArr.push(o)
     },

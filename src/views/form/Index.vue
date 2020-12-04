@@ -11,20 +11,22 @@
       @click-left="onClickLeft"
     />
 
-    <record />
+    <!-- <record /> -->
 
     <van-form @submit="onSubmit">
       <van-collapse v-model="activeNames">
         <van-collapse-item title="基本信息" name="1">
-          <basic :cus="cus" :rz="rz" />
+          <!-- <basic :cus="cus" :rz="rz" /> -->
         </van-collapse-item>
         <van-collapse-item title="职业信息" name="2">
-          <job-info :rz="rz" />
+          <!-- <job-info :rz="rz" /> -->
         </van-collapse-item>
         <van-collapse-item title="信用信息" name="3">
-          <credit-info :rz="rz"></credit-info>
+          <!-- <credit-info :rz="rz"></credit-info> -->
         </van-collapse-item>
-        <van-collapse-item title="房产信息" name="4">内容</van-collapse-item>
+        <van-collapse-item title="房产信息" name="4">
+          <house-info :rz="rz"></house-info>
+        </van-collapse-item>
         <van-collapse-item title="保单信息" name="5">内容</van-collapse-item>
         <van-collapse-item title="车产信息" name="6">内容</van-collapse-item>
         <van-collapse-item title="公积金" name="7">内容</van-collapse-item>
@@ -50,37 +52,40 @@
 </template>
 
 <script>
-import Record from './components/Record'
-import Basic from './components/Basic'
-import JobInfo from './components/JobInfo'
-import CreditInfo from './components/CreditInfo'
+// import Record from './components/Record'
+// import Basic from './components/Basic'
+// import JobInfo from './components/JobInfo'
+// import CreditInfo from './components/CreditInfo'
+import HouseInfo from './components/HouseInfo'
 export default {
   name: 'Form',
   components: {
-    Record,
-    Basic,
-    JobInfo,
-    CreditInfo,
+    // Record,
+    // Basic,
+    // JobInfo,
+    // CreditInfo,
+    HouseInfo,
   },
-  watch: {
-    // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
-    cus(newV, oldV) {
-      console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
-    },
-    rz(newV, oldV) {
-      console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
-    },
-  },
+  // watch: {
+  //   // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
+  //   cus(newV, oldV) {
+  //     console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
+  //   },
+  //   rz(newV, oldV) {
+  //     console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
+  //   },
+  // },
   data() {
     return {
       cus: {},
       rz: {},
-      activeNames: ['1', '2', '3'],
+      activeNames: ['1', '2', '3', '4'],
     }
   },
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
+    console.log('this.rz: ', this.rz)
   },
   methods: {
     // 校验函数返回 true 表示校验通过，false 表示不通过基本
@@ -145,6 +150,9 @@ export default {
   }
   /deep/ .van-cell::after {
     border-top: 1px solid #c8c9cc;
+  }
+  /deep/ .van-radio--horizontal {
+    margin-bottom: 12px;
   }
 }
 </style>

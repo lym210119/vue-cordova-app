@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.vue.example.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>VueExampleAppName</name>
+<widget id="com.tandan.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>锦谈</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -26,10 +26,10 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
-        <string>need microphone access to record sounds</string>
-	</edit-config>
+          <string>need microphone access to record sounds</string>
+    </edit-config>
     <preference name="iosPersistentFileLocation" value="Library" />
     <!-- <preference name="iosPersistentFileLocation" value="Compatibility" /> -->
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <!-- <preference name="StatusBarOverlaysWebView" value="true" /> -->
     <!-- <preference name="StatusBarStyle" value="lightContent" /> -->
 </widget>
