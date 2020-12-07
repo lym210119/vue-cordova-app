@@ -20,13 +20,37 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon src="res/icon/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
+        <icon src="res/icon/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />
+        <icon src="res/icon/android/mipmap-hdpi/ic_launcher.png" density="hdpi" />
+        <icon src="res/icon/android/mipmap-xhdpi/ic_launcher.png" density="xhdpi" />
+        <icon src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" density="xxhdpi" />
+        <icon src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" density="xxxhdpi" />
+
+        <config-file parent="/*" target="AndroidManifest.xml">
+          <uses-permission android:name="android.permission.INTERNET" />
+          <uses-permission android:name="android.permission.RECORD_AUDIO" />
+          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
     <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
-          <string>need microphone access to record sounds</string>
+        <string>need microphone access to record sounds</string>
+    </edit-config>
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need camera access to take pictures</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need photo library access to get pictures from there</string>
+    </edit-config>
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need location access to find things nearby</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need photo library access to save pictures there</string>
     </edit-config>
     <preference name="iosPersistentFileLocation" value="Library" />
     <!-- <preference name="iosPersistentFileLocation" value="Compatibility" /> -->

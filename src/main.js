@@ -82,6 +82,36 @@ document.addEventListener('deviceready', function() {
   Vue.prototype.$FileUploadOptions = window.FileUploadOptions
   Vue.prototype.$StatusBar = window.StatusBar
   Vue.prototype.$http = Api
+
+  var permissions = window.cordova.plugins.permissions
+  var list = [
+    permissions.INTERNET,
+    permissions.RECORD_AUDIO,
+    permissions.WRITE_EXTERNAL_STORAGE,
+  ]
+  list.forEach(v => {
+    console.log('permissions: ', permissions)
+    permissions.checkPermission(v, function(status) {
+      console.log('status: ', status)
+      if (status.hasPermission) {
+        console.log('Yes :D ')
+      } else {
+        console.warn('No :( ')
+        permissions.requestPermissions(
+          v,
+          function success(status) {
+            console.log('status: ', status)
+            if (!status.hasPermission)
+              console.warn(`${v} permission is not turned on`)
+          },
+          function error() {
+            console.warn(`${v} permission is not turned on`)
+          },
+        )
+      }
+    })
+  })
+
   new Vue({
     router,
     store,
