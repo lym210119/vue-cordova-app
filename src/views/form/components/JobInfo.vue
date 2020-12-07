@@ -65,21 +65,28 @@
       placeholder="经营范围"
       maxlength="10"
     />
-
     <van-field
+      required
       readonly
       clickable
+      autofocus
       name="zhizhao"
       :value="rz.zhizhao"
       label="注册时间"
       placeholder="点击选择注册时间"
-      @click="showCalendarRegisterTime = true"
+      @click="showPickerDate = true"
     />
-    <van-calendar
-      v-model="showCalendarRegisterTime"
-      @confirm="onConfirmRegisterTime"
-      :show-confirm="false"
-    />
+    <van-popup v-model="showPickerDate" position="bottom">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        title="选择年月日"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @cancel="showPickerDate = false"
+        @confirm="onConfirmDate"
+      />
+    </van-popup>
 
     <van-field name="forbid" label="是否禁入行业">
       <template #input>
@@ -159,15 +166,22 @@ export default {
   },
   data() {
     return {
-      showCalendarRegisterTime: false,
+      showPickerDate: false,
+      minDate: new Date(1990, 0, 1),
+      maxDate: new Date(),
+      currentDate: new Date(),
     }
   },
   methods: {
-    // 日历选择器确认 注册时间
-    onConfirmRegisterTime(date) {
-      this.rz.zhizhao = `${date.getFullYear()}-${date.getMonth() +
-        1}-${date.getDate()}`
-      this.showCalendarRegisterTime = false
+    // 日期选择器确认 注册时间
+    onConfirmDate(date) {
+      let year = date.getFullYear()
+      let month = date.getMonth() + 1
+      month = month < 10 ? '0' + month : month
+      let day = date.getDate()
+      day = day < 10 ? '0' + day : day
+      this.rz.zhizhao = `${year} - ${month} - ${day}`
+      this.showPickerDate = false
     },
   },
 }

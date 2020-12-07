@@ -8,6 +8,7 @@
       fixed
       placeholder
       safe-area-inset-top
+      z-index="9999"
     />
 
     <van-sticky :offset-top="46">
@@ -74,7 +75,12 @@ export default {
   },
   mounted() {
     // this.onLoad()
+    document.addEventListener('backbutton', this.onClickRight, false)
   },
+  beforeDestroy() {
+    document.removeEventListener('backbutton', this.onClickRight, false)
+  },
+
   methods: {
     toDetail(e) {
       console.log('e: ', e)

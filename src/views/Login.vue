@@ -1,5 +1,12 @@
 <template>
   <div class="login">
+    <van-nav-bar
+      title="登录"
+      fixed
+      placeholder
+      safe-area-inset-top
+      z-index="9999"
+    />
     <div class="logo">
       <img alt="Vue logo" src="../assets/logo.png" />
     </div>

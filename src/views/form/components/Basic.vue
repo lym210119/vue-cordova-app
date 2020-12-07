@@ -93,13 +93,19 @@
       :value="rz.expectDate"
       label="期望到账时间"
       placeholder="点击选择期望到账时间"
-      @click="showCalendarExpectDate = true"
+      @click="showPickerDate = true"
     />
-    <van-calendar
-      v-model="showCalendarExpectDate"
-      @confirm="onConfirmExpectDate"
-      :show-confirm="false"
-    />
+    <van-popup v-model="showPickerDate" position="bottom">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        title="选择年月日"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @cancel="showPickerDate = false"
+        @confirm="onConfirmDate"
+      />
+    </van-popup>
 
     <van-field name="hyzk" label="婚姻状况" required autofocus>
       <template #input>
@@ -175,7 +181,10 @@ export default {
       valueLoanAmount: '',
       showPickerLoanAmount: false,
 
-      showCalendarExpectDate: false,
+      showPickerDate: false,
+      minDate: new Date(1990, 0, 1),
+      maxDate: new Date(),
+      currentDate: new Date(),
     }
   },
   created() {
@@ -185,11 +194,15 @@ export default {
     }
   },
   methods: {
-    // 日历选择器确认 期望到账时间
-    onConfirmExpectDate(date) {
-      this.rz.expectDate = `${date.getFullYear()}-${date.getMonth() +
-        1}-${date.getDate()}`
-      this.showCalendarExpectDate = false
+    // 日期选择器确认 期望到账时间
+    onConfirmDate(date) {
+      let year = date.getFullYear()
+      let month = date.getMonth() + 1
+      month = month < 10 ? '0' + month : month
+      let day = date.getDate()
+      day = day < 10 ? '0' + day : day
+      this.rz.expectDate = `${year} - ${month} - ${day}`
+      this.showPickerDate = false
     },
     // 选择器确认 借款额度
     onConfirmLoanAmount(e) {

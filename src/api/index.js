@@ -35,17 +35,24 @@ export function getCusDetail(data) {
   })
 }
 
-// export function getInfo(token) {
-//   return request({
-//     url: '/vue-element-admin/user/info',
-//     method: 'get',
-//     params: { token }
-//   })
-// }
+// 提交融资
+export function submitInfo(data) {
+  return request({
+    url: '/erp/Api/api_rz',
+    method: 'post',
+    data,
+  })
+}
 
-// export function logout() {
-//   return request({
-//     url: '/vue-element-admin/user/logout',
-//     method: 'post'
-//   })
-// }
+// // 申请方案
+// applyScheme(data) {
+//   return minRequest.post("/erp/Api/apply_scheme", data);
+// },
+// // 查看方案
+// viewScheme(data) {
+//   return minRequest.post("/erp/Api/getSomeInfo", data);
+// },
+// // 提交客户接受度
+// submitClientRate(data) {
+//   return minRequest.post("/erp/api/saveCusAccept", data);
+// },

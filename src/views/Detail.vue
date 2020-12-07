@@ -7,6 +7,7 @@
       fixed
       placeholder
       safe-area-inset-top
+      z-index="9999"
       @click-left="onClickLeft"
     />
     <cus-cell :item="item" />

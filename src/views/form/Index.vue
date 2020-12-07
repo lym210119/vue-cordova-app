@@ -8,6 +8,7 @@
       fixed
       placeholder
       safe-area-inset-top
+      z-index="9999"
       @click-left="onClickLeft"
     />
 
@@ -16,36 +17,87 @@
     <van-form @submit="onSubmit">
       <van-collapse v-model="activeNames">
         <van-collapse-item title="基本信息" name="1">
-          <!-- <basic :cus="cus" :rz="rz" /> -->
+          <Basic :cus="cus" :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="职业信息" name="2">
-          <!-- <job-info :rz="rz" /> -->
+          <JobInfo :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="信用信息" name="3">
-          <!-- <credit-info :rz="rz"></credit-info> -->
+          <CreditInfo :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="房产信息" name="4">
-          <house-info :rz="rz"></house-info>
+          <HouseInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="保单信息" name="5">内容</van-collapse-item>
-        <van-collapse-item title="车产信息" name="6">内容</van-collapse-item>
-        <van-collapse-item title="公积金" name="7">内容</van-collapse-item>
-        <van-collapse-item title="社保信息" name="8">内容</van-collapse-item>
-        <van-collapse-item title="打卡工资" name="9">内容</van-collapse-item>
-        <van-collapse-item title="微粒贷" name="10">内容</van-collapse-item>
-        <van-collapse-item title="信用卡" name="11">内容</van-collapse-item>
-        <van-collapse-item title="学历" name="12">内容</van-collapse-item>
-        <van-collapse-item title="装修贷" name="13">内容</van-collapse-item>
-        <van-collapse-item title="税贷" name="14">内容</van-collapse-item>
-        <van-collapse-item title="添加联系人" name="15">内容</van-collapse-item>
-        <van-collapse-item title="上传资料" name="16">内容</van-collapse-item>
+        <van-collapse-item title="保单信息" name="5">
+          <BaoDan :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="车产信息" name="6">
+          <CarInfo :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="公积金" name="7">
+          <GongJiJin :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="社保信息" name="8">
+          <SheBao :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="打卡工资" name="9">
+          <Wage :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="微粒贷" name="10">
+          <WeiLiDai :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="信用卡" name="11">
+          <CreditCard :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="学历" name="12">
+          <Education :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="装修贷" name="13">
+          <ZhuangXiu :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="税贷" name="14">
+          <TaxLoan :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="添加联系人" name="15">
+          <Contact :rz="rz" />
+        </van-collapse-item>
+        <van-collapse-item title="上传资料" name="16">
+          <Upload :rz="rz" />
+        </van-collapse-item>
         <!-- <van-collapse-item title="" name="17">内容</van-collapse-item> -->
       </van-collapse>
 
-      <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">
+      <div style="margin: 16px;text-align: center;">
+        <van-field v-model="cus.KEYID" name="cid" v-show="false" />
+        <van-field
+          v-model="$store.state.userInfo.userId"
+          name="userId"
+          v-show="false"
+        />
+        <van-field
+          v-model="$store.state.userInfo.compid"
+          name="compid"
+          v-show="false"
+        />
+
+        <van-button
+          round
+          block
+          type="info"
+          native-type="submit"
+          v-if="!isSubmit"
+        >
           提交
         </van-button>
+
+        <div class="btn-group" v-else>
+          <van-button round type="info">
+            查看评级
+          </van-button>
+          <van-button round color="linear-gradient(to right, #ff6034, #ee0a24)">
+            结束谈单
+          </van-button>
+        </div>
       </div>
     </van-form>
   </div>
@@ -53,18 +105,43 @@
 
 <script>
 // import Record from './components/Record'
-// import Basic from './components/Basic'
-// import JobInfo from './components/JobInfo'
-// import CreditInfo from './components/CreditInfo'
+import Basic from './components/Basic'
+import JobInfo from './components/JobInfo'
+import CreditInfo from './components/CreditInfo'
 import HouseInfo from './components/HouseInfo'
+import BaoDan from './components/BaoDan'
+import CarInfo from './components/CarInfo'
+import GongJiJin from './components/GongJiJin'
+import SheBao from './components/SheBao'
+import Wage from './components/Wage'
+import WeiLiDai from './components/WeiLiDai'
+import CreditCard from './components/CreditCard'
+import Education from './components/Education'
+import ZhuangXiu from './components/ZhuangXiu'
+import TaxLoan from './components/TaxLoan'
+import Contact from './components/Contact'
+import Upload from './components/Upload'
+
 export default {
   name: 'Form',
   components: {
     // Record,
-    // Basic,
-    // JobInfo,
-    // CreditInfo,
+    Basic,
+    JobInfo,
+    CreditInfo,
     HouseInfo,
+    BaoDan,
+    CarInfo,
+    GongJiJin,
+    SheBao,
+    Wage,
+    WeiLiDai,
+    CreditCard,
+    Education,
+    ZhuangXiu,
+    TaxLoan,
+    Contact,
+    Upload,
   },
   // watch: {
   //   // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
@@ -79,13 +156,21 @@ export default {
     return {
       cus: {},
       rz: {},
-      activeNames: ['1', '2', '3', '4'],
+      activeNames: Array.from({ length: 16 }, (x, i) => i + 1 + ''),
+      isSubmit: false, // 是否提交了表单
     }
   },
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
     console.log('this.rz: ', this.rz)
+  },
+  mounted() {
+    // this.onLoad()
+    document.addEventListener('backbutton', this.onClickLeft, false)
+  },
+  beforeDestroy() {
+    document.removeEventListener('backbutton', this.onClickLeft, false)
   },
   methods: {
     // 校验函数返回 true 表示校验通过，false 表示不通过基本
@@ -109,6 +194,19 @@ export default {
 
     onSubmit(e) {
       console.log('e: ', e)
+      e.smallLoanNum = 0
+      Object.keys(e).map(v => {
+        if (v.includes('ifOrganization') && e[v] === '2') {
+          console.log(v)
+          e.smallLoanNum++
+        }
+      })
+      console.log('小袋个数')
+      console.log(e.smallLoanNum)
+      this.$http.submitInfo(e).then(res => {
+        console.log('res: ', res)
+        this.isSubmit = true
+      })
     },
     onClickLeft() {
       this.$dialog
@@ -153,6 +251,12 @@ export default {
   }
   /deep/ .van-radio--horizontal {
     margin-bottom: 12px;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
 }
 </style>

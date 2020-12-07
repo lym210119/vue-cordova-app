@@ -25,12 +25,15 @@ import {
   CollapseItem,
   RadioGroup,
   Radio,
+  Checkbox,
+  CheckboxGroup,
   Popup,
   Picker,
-  Calendar,
+  DatetimePicker,
   Step,
   Steps,
   Tag,
+  Uploader,
 } from 'vant'
 
 import * as Api from './api'
@@ -52,12 +55,15 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Radio)
 Vue.use(RadioGroup)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
 Vue.use(Popup)
 Vue.use(Picker)
-Vue.use(Calendar)
+Vue.use(DatetimePicker)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tag)
+Vue.use(Uploader)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 
