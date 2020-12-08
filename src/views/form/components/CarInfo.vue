@@ -129,10 +129,17 @@ export default {
   data() {
     return {
       showPickerDate: false,
-      minDate: new Date(1990, 0, 1),
+      minDate: new Date(
+        new Date().getFullYear() - 10,
+        new Date().getMonth(),
+        new Date().getDate(),
+      ),
       maxDate: new Date(),
       currentDate: new Date(),
     }
+  },
+  mounted() {
+    this.currentDate = this.rz.qkcdengji || this.currentDate
   },
   methods: {
     // 日期选择器确认 期望到账时间
@@ -142,7 +149,7 @@ export default {
       month = month < 10 ? '0' + month : month
       let day = date.getDate()
       day = day < 10 ? '0' + day : day
-      this.rz.qkcdengji = `${year} - ${month} - ${day}`
+      this.rz.qkcdengji = `${year}-${month}-${day}`
       this.showPickerDate = false
     },
   },

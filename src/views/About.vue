@@ -1,5 +1,10 @@
 <template>
   <div class="about">
+    <img
+      src="https://view.freev2ray.org/images/pic09.jpg"
+      alt=""
+      style="width: 100%"
+    />
     <h1>This is an about page</h1>
     <van-button type="default" @click="record">录音</van-button>
     <van-button type="primary" @click="stop">停止</van-button>

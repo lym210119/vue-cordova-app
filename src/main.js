@@ -90,17 +90,14 @@ document.addEventListener('deviceready', function() {
     permissions.WRITE_EXTERNAL_STORAGE,
   ]
   list.forEach(v => {
-    console.log('permissions: ', permissions)
     permissions.checkPermission(v, function(status) {
-      console.log('status: ', status)
       if (status.hasPermission) {
-        console.log('Yes :D ')
+        console.log(`Yes :D  - ${v}`)
       } else {
-        console.warn('No :( ')
+        console.warn(`No :( - ${v}`)
         permissions.requestPermissions(
           v,
           function success(status) {
-            console.log('status: ', status)
             if (!status.hasPermission)
               console.warn(`${v} permission is not turned on`)
           },

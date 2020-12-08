@@ -23,7 +23,7 @@ export default {
     },
   },
   created() {
-    this.$StatusBar.backgroundColorByHexString('#1ab394')
+    // this.$StatusBar.backgroundColorByHexString('#1ab394')
     //在页面加载时读取sessionStorage里的状态信息
     if (localStorage.getItem('store')) {
       this.$store.replaceState(

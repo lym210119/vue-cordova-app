@@ -11,7 +11,7 @@
       @click-left="onClickLeft"
     />
     <cus-cell :item="item" />
-
+    <!-- <router-link to="/about">about</router-link> -->
     <div class="info">
       <van-tabs type="card" color="#3794df">
         <van-tab title="基本信息">

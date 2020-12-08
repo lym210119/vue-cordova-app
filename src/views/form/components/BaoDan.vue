@@ -69,9 +69,13 @@
       </van-button>
     </div>
 
-    <van-field name="policeSwitch" label="断缴">
+    <van-field name="policeSwitch" label="断缴" :value="rz.policeSwitch">
       <template #input>
-        <van-checkbox v-model="rz.policeSwitch" shape="square"
+        <van-checkbox
+          v-model="checked"
+          shape="square"
+          name="1"
+          @change="onChangeCheckbox"
           >断缴复效或一年2次以下</van-checkbox
         >
       </template>
@@ -129,12 +133,18 @@ export default {
         { value: '25', name: '信诚人寿' },
       ],
       indexInsuranceCompany: '',
+
+      checked: false,
     }
   },
   mounted() {
     this.initData()
   },
   methods: {
+    onChangeCheckbox(checked) {
+      console.log('checked: ', checked)
+      this.rz.policeSwitch = '1'
+    },
     dataFilter(name) {
       const arr = Object.keys(this.rz)
         .filter(v => {
@@ -146,6 +156,8 @@ export default {
       return arr
     },
     initData() {
+      this.checked = this.rz.policeSwitch === '1'
+
       const a = []
       const bdgongsi = this.dataFilter('bdgongsi')
       const bdjftype = this.dataFilter('bdjftype')

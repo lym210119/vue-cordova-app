@@ -9,12 +9,10 @@
       required
       maxlength="6"
       autofocus
-      :rules="[{ required: true, message: '请填写客户姓名' }]"
     />
     <van-field name="sexid" label="客户性别" required autofocus>
       <template #input>
         <van-radio-group v-model="gender" direction="horizontal">
-          <van-radio name="">未知</van-radio>
           <van-radio name="1">先生</van-radio>
           <van-radio name="2">女士</van-radio>
         </van-radio-group>
@@ -30,7 +28,6 @@
       required
       autofocus
       maxlength="18"
-      :rules="[{ required: true, message: '请填写身份证号' }]"
     />
 
     <van-field
@@ -42,7 +39,6 @@
       required
       autofocus
       maxlength="2"
-      :rules="[{ required: true, message: '请填写年龄' }]"
     />
 
     <van-field
@@ -60,7 +56,7 @@
         <input
           type="text"
           placeholder="点击选择借款额度"
-          :value="valueLoanAmount"
+          :value="valueLoanAmount || rz.jkedu"
           class="van-field__control"
         />
       </template>
@@ -127,7 +123,6 @@
       required
       autofocus
       maxlength="20"
-      :rules="[{ required: true, message: '请填写户口地' }]"
     />
 
     <van-field name="isdaikuan" label="配偶可否知晓贷款" required autofocus>
@@ -182,8 +177,12 @@ export default {
       showPickerLoanAmount: false,
 
       showPickerDate: false,
-      minDate: new Date(1990, 0, 1),
-      maxDate: new Date(),
+      minDate: new Date(),
+      maxDate: new Date(
+        new Date().getFullYear() + 5,
+        new Date().getMonth(),
+        new Date().getDate(),
+      ),
       currentDate: new Date(),
     }
   },
@@ -193,6 +192,18 @@ export default {
       this.gender = this.cus.sexid === '先生' ? '1' : '2'
     }
   },
+  mounted() {
+    if (this.rz.jkedu) {
+      const index = this.columnsLoanAmount.findIndex(
+        v => v.value === this.rz.jkedu,
+      )
+      console.log('index: ', index)
+      this.valueLoanAmount = this.columnsLoanAmount[index].name
+    }
+    console.log('this.rz.expectDate: ', this.rz.expectDate)
+
+    this.currentDate = this.rz.expectDate || this.currentDate
+  },
   methods: {
     // 日期选择器确认 期望到账时间
     onConfirmDate(date) {
@@ -201,7 +212,7 @@ export default {
       month = month < 10 ? '0' + month : month
       let day = date.getDate()
       day = day < 10 ? '0' + day : day
-      this.rz.expectDate = `${year} - ${month} - ${day}`
+      this.rz.expectDate = `${year}-${month}-${day}`
       this.showPickerDate = false
     },
     // 选择器确认 借款额度

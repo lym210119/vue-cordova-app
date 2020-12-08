@@ -91,15 +91,28 @@
         </van-button>
 
         <div class="btn-group" v-else>
-          <van-button round type="info">
+          <van-button
+            round
+            type="info"
+            native-type="button"
+            @click="handleViewRating"
+          >
             查看评级
           </van-button>
-          <van-button round color="linear-gradient(to right, #ff6034, #ee0a24)">
+          <van-button
+            round
+            native-type="button"
+            color="linear-gradient(to right, #ff6034, #ee0a24)"
+          >
             结束谈单
           </van-button>
         </div>
       </div>
     </van-form>
+
+    <van-popup class="popup-rating" v-model="popupRatingShow">
+      <Rating :score="score" />
+    </van-popup>
   </div>
 </template>
 
@@ -121,6 +134,7 @@ import ZhuangXiu from './components/ZhuangXiu'
 import TaxLoan from './components/TaxLoan'
 import Contact from './components/Contact'
 import Upload from './components/Upload'
+import Rating from './components/Rating'
 
 export default {
   name: 'Form',
@@ -142,6 +156,7 @@ export default {
     TaxLoan,
     Contact,
     Upload,
+    Rating,
   },
   // watch: {
   //   // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
@@ -158,6 +173,8 @@ export default {
       rz: {},
       activeNames: Array.from({ length: 16 }, (x, i) => i + 1 + ''),
       isSubmit: false, // 是否提交了表单
+      popupRatingShow: false,
+      score: {},
     }
   },
   created() {
@@ -173,25 +190,105 @@ export default {
     document.removeEventListener('backbutton', this.onClickLeft, false)
   },
   methods: {
-    // 校验函数返回 true 表示校验通过，false 表示不通过基本
-    validator(val) {
-      return /1\d{10}/.test(val)
-    },
+    // // 校验函数返回 true 表示校验通过，false 表示不通过基本
+    // validator(val) {
+    //   return /1\d{10}/.test(val)
+    // },
     // 异步校验函数返回 Promise
-    asyncValidator(val) {
-      return new Promise(resolve => {
-        this.$toast.loading('验证中...')
+    // asyncValidator(val) {
+    //   return new Promise(resolve => {
+    //     this.$toast.loading('验证中...')
 
-        setTimeout(() => {
-          this.$toast.clear()
-          resolve(/\d{6}/.test(val))
-        }, 1000)
+    //     setTimeout(() => {
+    //       this.$toast.clear()
+    //       resolve(/\d{6}/.test(val))
+    //     }, 1000)
+    //   })
+    // },
+
+    // 查看评级
+    handleViewRating() {
+      this.popupRatingShow = true
+    },
+    // 验证表单
+    validator(formdata) {
+      console.log('formdata: ', formdata)
+      const errTips = {
+        cname: '请输入客户姓名',
+        sexid: '请选择客户性别',
+        card: '请输入客户身份证号',
+        age: '请输入客户年龄',
+        jkedu: '请选择借款额度',
+        intoType: '请选择进件类型',
+        expectDate: '请选择期望到账时间',
+        hyzk: '请选择婚姻状况',
+        hkd: '请输入户口地',
+        isdaikuan: '请选择配偶可否知晓贷款',
+        iszhixi: '请选择直系亲属可否知晓贷款',
+        zhiye: '请选择职业身份',
+        gongsi: '请输入公司名称',
+        xugua: '请选择需挂靠单位',
+        xiahu: '请选择单位能否下户',
+        zuoji: '请选择单位座机',
+        // propertyStatus: "请选择产权情况",
+        hasCar: '请选择是否有车',
+      }
+
+      return new Promise(resolve => {
+        for (let key in errTips) {
+          console.log(key)
+          if (
+            Object.prototype.hasOwnProperty.call(formdata, key) &&
+            !formdata[key]
+          ) {
+            this.$toast.fail(errTips[key])
+            return
+          } else {
+            if (
+              key === 'card' &&
+              !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(
+                formdata.card,
+              )
+            ) {
+              // this.isFocus[key] = true
+              this.$toast.fail('请填写正确的身份证号')
+              return
+            }
+          }
+        }
+
+        // 抵押有限制
+        if (formdata.intoType === '1') {
+          if (!formdata.propertyStatus) {
+            this.$toast.fail('请选择产权情况')
+            return
+          }
+        }
+        if (formdata.hasCar === '1') {
+          var anjie = Boolean(
+            formdata.ajcpaizhao &&
+              formdata.ajcyuegong &&
+              formdata.ajchuankuan &&
+              formdata.ajcjine,
+          )
+          var quankuan = Boolean(
+            formdata.qkcpaizhao &&
+              formdata.qkczongjia &&
+              formdata.qkcnianxian &&
+              formdata.qkcdengji,
+          )
+          console.log(anjie)
+          console.log(quankuan)
+          if (!anjie && !quankuan) {
+            this.$toast.fail('请填写完整全款车或按揭车')
+            return
+          }
+        }
+
+        resolve()
       })
     },
-    onFailed(errorInfo) {
-      console.log('errorInfo: ', errorInfo)
-    },
-
+    //提交表单
     onSubmit(e) {
       console.log('e: ', e)
       e.smallLoanNum = 0
@@ -203,9 +300,18 @@ export default {
       })
       console.log('小袋个数')
       console.log(e.smallLoanNum)
-      this.$http.submitInfo(e).then(res => {
-        console.log('res: ', res)
-        this.isSubmit = true
+
+      e.policeSwitch = +e.policeSwitch + ''
+
+      this.validator(e).then(() => {
+        this.$http.submitInfo(e).then(res => {
+          console.log('res: ', res)
+          if (res.code === 1) {
+            this.$toast.success('提交成功')
+            this.score = res.score
+            this.isSubmit = true
+          }
+        })
       })
     },
     onClickLeft() {
@@ -257,6 +363,12 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  .popup-rating {
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
 </style>

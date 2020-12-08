@@ -71,7 +71,7 @@ export default {
           // 调用 Vuex
           this.$store.dispatch('login', userInfo).then(() => {
             this.$toast.success({
-              message: res.msg,
+              message: res.msg || '登录成功！',
               forbidClick: true,
               onClose: () => {
                 this.$router.push('/')

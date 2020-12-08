@@ -1,6 +1,6 @@
 <template>
   <div class="house-info">
-    <van-field name="propertyStatus" label="产权情况">
+    <van-field name="propertyStatus" label="产权情况" required>
       <template #input>
         <van-radio-group v-model="rz.propertyStatus" direction="horizontal">
           <van-radio name="1">正常</van-radio>

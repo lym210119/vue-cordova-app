@@ -11,40 +11,42 @@
       z-index="9999"
     />
 
-    <van-sticky :offset-top="46">
-      <van-search
-        v-model="keyword"
-        show-action
-        placeholder="请输入搜索关键词"
-        @search="onSearch"
-      >
-        <template #action>
-          <van-button size="small" type="info" @click="onSearch"
-            >搜索</van-button
-          >
-        </template>
-      </van-search>
-    </van-sticky>
+    <div class="list-con">
+      <van-sticky :offset-top="46">
+        <van-search
+          v-model="keyword"
+          show-action
+          placeholder="请输入搜索关键词"
+          @search="onSearch"
+        >
+          <template #action>
+            <van-button size="small" type="info" @click="onSearch"
+              >搜索</van-button
+            >
+          </template>
+        </van-search>
+      </van-sticky>
 
-    <van-pull-refresh
-      v-model="isLoading"
-      @refresh="onRefresh"
-      style="min-height: calc(100vh - 101px);"
-    >
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
+      <van-pull-refresh
+        v-model="isLoading"
+        @refresh="onRefresh"
+        style="flex:1; overflow: scroll;"
       >
-        <cus-cell
-          v-for="(item, index) in list"
-          :key="index"
-          :item="item"
-          @click.native="toDetail(item)"
-        />
-      </van-list>
-    </van-pull-refresh>
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <cus-cell
+            v-for="(item, index) in list"
+            :key="index"
+            :item="item"
+            @click.native="toDetail(item)"
+          />
+        </van-list>
+      </van-pull-refresh>
+    </div>
   </div>
 </template>
 
@@ -172,6 +174,19 @@ export default {
 .home {
   /deep/ .van-sticky {
     border-bottom: 1px solid #ebedf0;
+  }
+
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .list-con {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
   }
 }
 </style>
