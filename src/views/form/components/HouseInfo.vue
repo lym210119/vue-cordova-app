@@ -183,6 +183,15 @@ export default {
       valueHouseType: '',
     }
   },
+  mounted() {
+    const index = this.columnsHouseType.findIndex(
+      v => v.value === this.rz.fwtype,
+    )
+    this.valueHouseType = this.columnsHouseType[index].name
+
+    this.rz.propertyStatus = this.rz.propertyStatus + ''
+    this.rz.rzDyThat = this.rz.rzDyThat + ''
+  },
   methods: {
     // 选择器确认 房屋类型
     onConfirmHouseType(e) {

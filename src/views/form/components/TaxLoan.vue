@@ -106,6 +106,14 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    this.rz.nashuiduanjiao = this.rz.nashuiduanjiao + ''
+    this.rz.nashuipingji = this.rz.nashuipingji + ''
+    this.rz.changeFaren = this.rz.changeFaren + ''
+    this.rz.changeGuquan = this.rz.changeGuquan + ''
+    this.rz.zhizhaoyouguansi = this.rz.zhizhaoyouguansi + ''
+    this.rz.jingyingdizhishiyizhi = this.rz.jingyingdizhishiyizhi + ''
+  },
 }
 </script>
 

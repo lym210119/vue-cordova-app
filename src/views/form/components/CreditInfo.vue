@@ -189,6 +189,13 @@ export default {
       return arr
     },
     initData() {
+      const index = this.cxnumArray.findIndex(v => v.value === this.rz.cxnum)
+      this.valueQueryTimes = this.cxnumArray[index].name
+
+      console.log('this.rz.overdue: ', this.rz.overdue)
+      this.rz.overdue = this.rz.overdue + ''
+      console.log('this.rz.overdue: ', this.rz.overdue)
+
       const a = []
       const dkyinhang = this.dataFilter('dkyinhang')
       const ifpiguo = this.dataFilter('ifpiguo')

@@ -1,12 +1,12 @@
 <template>
   <div class="contact">
-    <div class="contact-item" v-for="(item, i) in contactsNum" :key="i">
+    <div class="contact-item" v-for="(item, i) in contactArr" :key="i">
       <div class="my-section">
         <span>联系人 </span>
         <van-tag round type="primary">{{ i + 1 }}</van-tag>
       </div>
       <van-field
-        v-model="item.contact"
+        v-model="item.name"
         :name="'contact' + (i + 1) + '[name]'"
         type="text"
         label="联系人姓名"
@@ -14,12 +14,13 @@
         maxlength="20"
       />
       <van-field
-        v-model="item.contact"
+        v-model="item.TEL"
         :name="'contact' + (i + 1) + '[TEL]'"
         type="digit"
         label="联系人电话"
         placeholder="联系人电话"
-        maxlength="20"
+        maxlength="11"
+        :rules="[{ pattern, message: '请输入正确的手机号' }]"
       />
     </div>
     <div style="margin: 16px; text-align: center;">
@@ -46,16 +47,26 @@ export default {
   },
   data() {
     return {
-      contactsNum: 1,
+      pattern: /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/,
+      contactArr: [
+        {
+          name: '',
+          TEL: '',
+        },
+      ],
     }
   },
   methods: {
     add() {
-      if (this.contactsNum >= 5) {
+      if (this.contactArr.length >= 5) {
         this.$toast.fail('最多添加5个联系人')
         return
       }
-      this.contactsNum++
+      const o = {
+        name: '',
+        TEL: '',
+      }
+      this.contactArr.push(o)
     },
   },
 }
