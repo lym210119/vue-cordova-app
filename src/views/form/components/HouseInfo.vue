@@ -106,6 +106,7 @@
       <template #input>
         <input
           type="text"
+          readonly
           placeholder="点击选择房屋类型"
           :value="valueHouseType"
           class="van-field__control"

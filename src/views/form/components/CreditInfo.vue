@@ -82,6 +82,7 @@
       <template #input>
         <input
           type="text"
+          readonly
           placeholder="点击选择征信查询次数"
           :value="valueQueryTimes"
           class="van-field__control"

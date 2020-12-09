@@ -55,6 +55,7 @@
       <template #input>
         <input
           type="text"
+          readonly
           placeholder="点击选择借款额度"
           :value="valueLoanAmount || rz.jkedu"
           class="van-field__control"

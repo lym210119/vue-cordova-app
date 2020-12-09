@@ -1,16 +1,10 @@
 <template>
   <div class="login">
-    <van-nav-bar
-      title="登录"
-      fixed
-      placeholder
-      safe-area-inset-top
-      z-index="9999"
-    />
-    <div class="logo">
-      <img alt="Vue logo" src="../assets/logo.png" />
-    </div>
+    <van-nav-bar title="登录" fixed safe-area-inset-top z-index="9999" />
     <van-form @submit="onSubmit">
+      <div class="logo">
+        <img alt="logo" src="../assets/logo.png" />
+      </div>
       <van-field
         v-model="username"
         name="username"
@@ -124,7 +118,12 @@ export default {
   justify-content: center;
 
   .logo {
+    margin-bottom: 50px;
     text-align: center;
+    img {
+      width: 100px;
+      border-radius: 50%;
+    }
   }
 }
 </style>

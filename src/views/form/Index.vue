@@ -14,7 +14,7 @@
 
     <!-- <record /> -->
 
-    <van-form @submit="onSubmit">
+    <van-form class="form-con" @submit="onSubmit">
       <van-collapse v-model="activeNames">
         <van-collapse-item title="基本信息" name="1">
           <Basic :cus="cus" :rz="rz" />
@@ -61,9 +61,9 @@
         <van-collapse-item title="添加联系人" name="15">
           <Contact :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="上传资料" name="16">
+        <!-- <van-collapse-item title="上传资料" name="16">
           <Upload :rz="rz" />
-        </van-collapse-item>
+        </van-collapse-item> -->
         <!-- <van-collapse-item title="" name="17">内容</van-collapse-item> -->
       </van-collapse>
 
@@ -133,7 +133,7 @@ import Education from './components/Education'
 import ZhuangXiu from './components/ZhuangXiu'
 import TaxLoan from './components/TaxLoan'
 import Contact from './components/Contact'
-import Upload from './components/Upload'
+// import Upload from './components/Upload'
 import Rating from './components/Rating'
 
 export default {
@@ -155,7 +155,7 @@ export default {
     ZhuangXiu,
     TaxLoan,
     Contact,
-    Upload,
+    // Upload,
     Rating,
   },
   // watch: {
@@ -357,6 +357,17 @@ export default {
   }
   /deep/ .van-radio--horizontal {
     margin-bottom: 12px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+
+  .form-con {
+    flex: 1;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .btn-group {

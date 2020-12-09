@@ -11,26 +11,25 @@
       z-index="9999"
     />
 
+    <van-sticky :offset-top="47">
+      <van-search
+        v-model="keyword"
+        show-action
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+      >
+        <template #action>
+          <van-button size="small" type="info" @click="onSearch"
+            >搜索</van-button
+          >
+        </template>
+      </van-search>
+    </van-sticky>
     <div class="list-con">
-      <van-sticky :offset-top="46">
-        <van-search
-          v-model="keyword"
-          show-action
-          placeholder="请输入搜索关键词"
-          @search="onSearch"
-        >
-          <template #action>
-            <van-button size="small" type="info" @click="onSearch"
-              >搜索</van-button
-            >
-          </template>
-        </van-search>
-      </van-sticky>
-
       <van-pull-refresh
+        class="pull-refresh"
         v-model="isLoading"
         @refresh="onRefresh"
-        style="flex:1; overflow: scroll;"
       >
         <van-list
           v-model="loading"
@@ -187,6 +186,12 @@ export default {
     flex-direction: column;
     position: relative;
     overflow: hidden;
+
+    .pull-refresh {
+      flex: 1;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 }
 </style>
