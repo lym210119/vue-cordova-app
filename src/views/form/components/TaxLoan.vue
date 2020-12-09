@@ -29,9 +29,9 @@
         <van-radio-group v-model="rz.nashuipingji" direction="horizontal">
           <van-radio name="1">A</van-radio>
           <van-radio name="2">B</van-radio>
-          <van-radio name="2">C</van-radio>
-          <van-radio name="2">D</van-radio>
-          <van-radio name="2">M</van-radio>
+          <van-radio name="3">C</van-radio>
+          <van-radio name="4">D</van-radio>
+          <van-radio name="5">M</van-radio>
         </van-radio-group>
       </template>
     </van-field>

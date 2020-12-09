@@ -5,11 +5,15 @@
       left-text="返回"
       left-arrow
       fixed
-      placeholder
       safe-area-inset-top
       z-index="9999"
       @click-left="onClickLeft"
+      :style="`padding-top: ${this.$StatusBarHeight}px`"
     />
+    <div
+      class="navbar-height"
+      :style="`padding-top: ${this.$StatusBarHeight + navBarHeight}px`"
+    ></div>
     <cus-cell :item="item" />
     <!-- <router-link to="/about">about</router-link> -->
     <div class="info">
@@ -122,6 +126,7 @@ export default {
   },
   data() {
     return {
+      navBarHeight: 46,
       tels: '',
       infoCus: '',
       infoFk: '',

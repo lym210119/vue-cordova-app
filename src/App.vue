@@ -20,10 +20,22 @@ export default {
       const toDepth = to.path.split('/').length
       const fromDepth = from.path.split('/').length
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+
+      // // cordova插件会定义一个StatusBar对象，当它只能在deviceready后才能使用
+      // if (this.$cordova.platformId == 'android') {
+      //   // 安卓需要特殊处理，参见 cordova 官方文档
+      //   this.$StatusBar.overlaysWebView(true)
+      // }
+      // this.onDeviceReady()
     },
   },
+  beforeCreate() {
+    this.$StatusBar.overlaysWebView(true)
+  },
   created() {
-    // this.$StatusBar.backgroundColorByHexString('#1ab394')
+    // // 保证安卓第一次进入状态栏能覆盖webview
+    // this.onDeviceReady()
+
     //在页面加载时读取sessionStorage里的状态信息
     if (localStorage.getItem('store')) {
       this.$store.replaceState(
@@ -40,6 +52,15 @@ export default {
       localStorage.setItem('store', JSON.stringify(this.$store.state))
     })
   },
+  // methods: {
+  //   onDeviceReady() {
+  //     // 根据路由动态改变状态栏样式
+  //     // 我给状态栏字体色为白色的路由都设置了一个路由元meta,属性 statusBarbackgroundColor 为1
+  //     this.$route.meta.statusBarbackgroundColor
+  //       ? this.$StatusBar.styleLightContent()
+  //       : this.$StatusBar.styleDefault()
+  //   },
+  // },
 }
 </script>
 

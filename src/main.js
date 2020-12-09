@@ -72,7 +72,7 @@ FastClick.attach(document.body)
 //   typeof cordova === 'object'
 // ) {
 
-document.addEventListener('deviceready', function() {
+document.addEventListener('deviceready', async function() {
   console.log('deviceready: ')
   Vue.prototype.$cordova = window.cordova
   Vue.prototype.$device = window.device
@@ -82,6 +82,15 @@ document.addEventListener('deviceready', function() {
   Vue.prototype.$FileUploadOptions = window.FileUploadOptions
   Vue.prototype.$StatusBar = window.StatusBar
   Vue.prototype.$http = Api
+
+  if (window.StatusBar.height) {
+    await window.StatusBar.height(function(height) {
+      console.log('height: ', height)
+      Vue.prototype.$StatusBarHeight = height
+    })
+  } else {
+    Vue.prototype.$StatusBarHeight = 0
+  }
 
   var permissions = window.cordova.plugins.permissions
   var list = [

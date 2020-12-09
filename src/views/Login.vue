@@ -1,9 +1,15 @@
 <template>
   <div class="login">
-    <van-nav-bar title="登录" fixed safe-area-inset-top z-index="9999" />
+    <van-nav-bar
+      title="登录"
+      fixed
+      safe-area-inset-top
+      z-index="9999"
+      :style="`padding-top: ${this.$StatusBarHeight}px`"
+    />
     <van-form @submit="onSubmit">
       <div class="logo">
-        <img alt="logo" src="../assets/logo.png" />
+        <img alt="logo" :src="logoSrc" />
       </div>
       <van-field
         v-model="username"
@@ -41,6 +47,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      logoSrc: require('../assets/logo.png'),
       username: '',
       password: '',
       actionsShow: false,
@@ -49,6 +56,10 @@ export default {
   },
   created() {
     // this.$StatusBar.backgroundColorByHexString('#f7f8fa')
+    console.log(process.env.VUE_APP_DEBUG)
+    if (process.env.VUE_APP_DEBUG) {
+      this.logoSrc = 'img/logo.png'
+    }
   },
   methods: {
     onSubmit(values) {
@@ -112,10 +123,11 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  // height: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  padding-top: 100px;
 
   .logo {
     margin-bottom: 50px;

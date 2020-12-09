@@ -6,11 +6,16 @@
       :border="false"
       left-arrow
       fixed
-      placeholder
       safe-area-inset-top
       z-index="9999"
       @click-left="onClickLeft"
+      :style="`padding-top: ${this.$StatusBarHeight}px`"
     />
+
+    <div
+      class="navbar-height"
+      :style="`padding-top: ${this.$StatusBarHeight + navBarHeight}px`"
+    ></div>
 
     <!-- <record /> -->
 
@@ -169,6 +174,7 @@ export default {
   // },
   data() {
     return {
+      navBarHeight: 46,
       cus: {},
       rz: {},
       activeNames: Array.from({ length: 16 }, (x, i) => i + 1 + ''),

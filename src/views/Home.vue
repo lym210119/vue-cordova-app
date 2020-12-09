@@ -6,12 +6,15 @@
       right-text="退出"
       @click-right="onClickRight"
       fixed
-      placeholder
       safe-area-inset-top
       z-index="9999"
+      :style="`padding-top: ${this.$StatusBarHeight}px`"
     />
-
-    <van-sticky :offset-top="47">
+    <div
+      class="navbar-height"
+      :style="`padding-top: ${this.$StatusBarHeight + navBarHeight}px`"
+    ></div>
+    <van-sticky :offset-top="this.$StatusBarHeight + navBarHeight">
       <van-search
         v-model="keyword"
         show-action
@@ -25,6 +28,7 @@
         </template>
       </van-search>
     </van-sticky>
+
     <div class="list-con">
       <van-pull-refresh
         class="pull-refresh"
@@ -58,6 +62,7 @@ export default {
   },
   data() {
     return {
+      navBarHeight: 46,
       leftText: '',
       keyword: '',
       isLoading: false,

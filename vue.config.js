@@ -1,5 +1,7 @@
-const TerserPlugin = require('terser-webpack-plugin')
-// const argv = require('yargs').describe('debug', 'debug 环境').argv
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 
 module.exports = {
   css: {
@@ -36,30 +38,21 @@ module.exports = {
     //   }
     // }
   },
-  // configureWebpack: config => {
-  //   if (process.env.NODE_ENV === 'production') {
-  //     // 为生产环境修改配置...
-  //     config.plugins.push(
-  //       // 添加代码压缩工具，及设置生产环境自动删除console
-
-  //       new TerserPlugin({
-  //         terserOptions: {
-  //           ecma: undefined,
-  //           warnings: false,
-  //           parse: {},
-  //           compress: {
-  //             drop_console: true,
-  //             drop_debugger: false,
-  //             pure_funcs: ['console.log'], // 移除console
-  //           },
-  //         },
-  //       }),
-  //     )
-  //   } else {
-  //     // 为开发环境修改配置...
-  //     // config.plugins.push(new VConsolePlugin({ enable: !!argv.debug }))
-  //   }
+  // chainWebpack: config => {
+  //   config.resolve.alias.set('@assets', resolve('src/assets/'))
   // },
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // 为生产环境修改配置...
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+        'console.log',
+      ]
+    } else {
+      // 为开发环境修改配置...
+      // config.plugins.push(new VConsolePlugin({ enable: !!argv.debug }))
+    }
+  },
   pluginOptions: {
     cordovaPath: 'src-cordova',
   },
