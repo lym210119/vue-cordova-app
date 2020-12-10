@@ -9,7 +9,7 @@
     />
     <van-form @submit="onSubmit">
       <div class="logo">
-        <img alt="logo" :src="logoSrc" />
+        <img alt="logo" src="../assets/logo.png" />
       </div>
       <van-field
         v-model="username"
@@ -47,7 +47,7 @@ export default {
   name: 'Login',
   data() {
     return {
-      logoSrc: require('../assets/logo.png'),
+      // logoSrc: require('../assets/logo.png'),
       username: '',
       password: '',
       actionsShow: false,
@@ -57,9 +57,9 @@ export default {
   created() {
     // this.$StatusBar.backgroundColorByHexString('#f7f8fa')
     console.log(process.env.VUE_APP_DEBUG)
-    if (process.env.VUE_APP_DEBUG) {
-      this.logoSrc = 'img/logo.png'
-    }
+    // if (!process.env.VUE_APP_DEBUG) {
+    //   this.logoSrc = 'img/logo.png'
+    // }
   },
   methods: {
     onSubmit(values) {
