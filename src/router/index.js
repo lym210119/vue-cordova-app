@@ -37,10 +37,15 @@ const routes = [
     name: 'Form',
     component: () => import('../views/form/Index.vue'),
   },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import('../views/Setting.vue'),
+  },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: process.env.CORDOVA_PLATFORM ? 'hash' : 'history',
   base: process.env.BASE_URL,
   routes,
 })
@@ -51,9 +56,9 @@ router.beforeEach(({ name }, from, next) => {
 
   if (store && JSON.parse(store).hasLogin) {
     // 如果存在 Token 且用户在 Login/Sign 页面则跳转到主页
-    name === 'Login' ? next('/') : next()
+    name === 'Login' || name === 'Setting' ? next('/') : next()
   } else {
-    name === 'Login' ? next() : next({ name: 'Login' })
+    name === 'Login' || name === 'Setting' ? next() : next({ name: 'Login' })
   }
 })
 

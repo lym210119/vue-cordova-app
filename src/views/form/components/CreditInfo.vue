@@ -191,7 +191,9 @@ export default {
     },
     initData() {
       const index = this.cxnumArray.findIndex(v => v.value === this.rz.cxnum)
-      this.valueQueryTimes = this.cxnumArray[index].name
+      if (index !== -1) {
+        this.valueQueryTimes = this.cxnumArray[index].name
+      }
 
       console.log('this.rz.overdue: ', this.rz.overdue)
       this.rz.overdue = this.rz.overdue + ''

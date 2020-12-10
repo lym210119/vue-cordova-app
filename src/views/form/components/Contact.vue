@@ -20,7 +20,6 @@
         label="联系人电话"
         placeholder="联系人电话"
         maxlength="11"
-        :rules="[{ pattern, message: '请输入正确的手机号' }]"
       />
     </div>
     <div style="margin: 16px; text-align: center;">

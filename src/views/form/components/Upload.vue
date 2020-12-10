@@ -4,15 +4,16 @@
       <template #input>
         <van-uploader
           v-model="uploader"
-          :before-read="beforeRead"
+          accept="image/*"
           :after-read="afterRead"
           :max-count="10"
           multiple
-          :max-size="500 * 1024"
+          :max-size="5 * 1024 * 1024"
           @oversize="onOversize"
         />
       </template>
     </van-field>
+    <van-field v-model="rz.images" name="images" v-show="false" />
   </div>
 </template>
 
@@ -26,25 +27,49 @@ export default {
   },
   data() {
     return {
-      uploader: [{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }],
+      uploader: [],
+    }
+  },
+  mounted() {
+    console.log('this.rz.qmurl: ', this.rz.qmurl)
+    if (this.rz.images) {
+      this.uploader = this.rz.qmurl.split('|').map(v => {
+        return { url: v }
+      })
     }
   },
   methods: {
-    afterRead(file) {
+    afterRead(data) {
       // 此时可以自行将文件上传至服务器
-      console.log(file)
+      console.log('afterRead-file: ', data)
+      console.log('this.rz.qmurl', this.rz.qmurl)
+      const compid = this.$store.state.userInfo.compid
+      let formData = new FormData()
+      formData.append('type', 'ipad')
+      formData.append('file', data.file)
+      formData.append('compid', compid)
+      console.log('formData: ', formData)
+      this.$http.uploadImages(formData).then(res => {
+        console.log('res: ', res)
+        if (res.code === 100) {
+          this.$toast.success(res.msg)
+          this.rz.images += res.url + '|'
+          console.log('this.rz.images: ', this.rz.images)
+        }
+      })
     },
     onOversize(file) {
       console.log(file)
-      this.$toast('文件大小不能超过 500kb')
+      this.$toast('文件大小不能超过 5M')
     },
     // 返回布尔值
     beforeRead(file) {
-      if (file.type !== 'image/jpeg') {
-        this.$toast('请上传 jpg 格式图片')
-        return false
-      }
-      return true
+      console.log('file: ', file)
+      // if (file.type !== 'image/jpeg') {
+      //   this.$toast('请上传 jpg 格式图片')
+      //   return false
+      // }
+      // return true
     },
     // 返回 Promise
     asyncBeforeRead(file) {

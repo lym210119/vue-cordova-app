@@ -199,7 +199,9 @@ export default {
         v => v.value === this.rz.jkedu,
       )
       console.log('index: ', index)
-      this.valueLoanAmount = this.columnsLoanAmount[index].name
+      if (index !== -1) {
+        this.valueLoanAmount = this.columnsLoanAmount[index].name
+      }
     }
     console.log('this.rz.expectDate: ', this.rz.expectDate)
 

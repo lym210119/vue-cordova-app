@@ -27,14 +27,14 @@
       placeholder="购买总价(万元)"
       maxlength="20"
     />
-    <van-field
+    <!-- <van-field
       v-model="rz.qkcnianxian"
       name="qkcnianxian"
       type="digit"
       label="已开年限"
       placeholder="已开年限"
       maxlength="2"
-    />
+    /> -->
     <van-field
       v-model="rz.mileage"
       name="mileage"

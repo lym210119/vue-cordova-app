@@ -5,6 +5,7 @@ export function login(data) {
     url: '/erp/Api/api_login',
     method: 'post',
     data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   })
 }
 
@@ -44,6 +45,15 @@ export function submitInfo(data) {
   })
 }
 
+// 资料上传
+export function uploadImages(data) {
+  return request({
+    url: '/erp/api/uploadIpad',
+    method: 'post',
+    data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  })
+}
 // // 申请方案
 // applyScheme(data) {
 //   return minRequest.post("/erp/Api/apply_scheme", data);

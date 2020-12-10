@@ -188,7 +188,7 @@ export default {
     const index = this.columnsHouseType.findIndex(
       v => v.value === this.rz.fwtype,
     )
-    this.valueHouseType = this.columnsHouseType[index].name
+    this.valueHouseType = index > -1 ? this.columnsHouseType[index].name : ''
 
     this.rz.propertyStatus = this.rz.propertyStatus + ''
     this.rz.rzDyThat = this.rz.rzDyThat + ''

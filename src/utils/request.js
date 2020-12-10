@@ -1,5 +1,5 @@
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 import { Toast } from 'vant'
 import store from '@/store'
 // import { getToken } from '@/utils/auth'
@@ -8,15 +8,17 @@ import store from '@/store'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  transformRequest: data => qs.stringify(data),
+  // transformRequest: data => qs.stringify(data),
   timeout: 5000, // request timeout
 })
 
 // request interceptor
 service.interceptors.request.use(
   config => {
+    console.log('store.getters: ', store.getters)
+    config.baseURL = store.getters.baseURL
+    console.log('config: ', config)
     // do something before request is sent
-
     Toast.loading({
       forbidClick: true,
       duration: 0, // 持续展示 toast

@@ -6,7 +6,12 @@
       safe-area-inset-top
       z-index="9999"
       :style="`padding-top: ${this.$StatusBarHeight}px`"
-    />
+      @click-right="onClickRight"
+    >
+      <template #right>
+        <van-icon name="setting-o" size="18" />
+      </template>
+    </van-nav-bar>
     <van-form @submit="onSubmit">
       <div class="logo">
         <img alt="logo" src="../assets/logo.png" />
@@ -62,12 +67,18 @@ export default {
     // }
   },
   methods: {
+    onClickRight() {
+      this.$router.push('/setting')
+    },
     onSubmit(values) {
       if (!values.username.trim()) {
         this.$toast('请输入账号')
         return
       }
-      this.$http.login(values).then(res => {
+      let formData = new FormData()
+      formData.append('username', values.username)
+      formData.append('password', values.password)
+      this.$http.login(formData).then(res => {
         // 判断是否为多公司
         if (!res.comparr) {
           let userInfo = res.info

@@ -17,7 +17,7 @@
       :style="`padding-top: ${this.$StatusBarHeight + navBarHeight}px`"
     ></div>
 
-    <!-- <record /> -->
+    <record ref="record" :cus="cus" :rz="rz" />
 
     <van-form class="form-con" @submit="onSubmit">
       <van-collapse v-model="activeNames">
@@ -66,9 +66,9 @@
         <van-collapse-item title="添加联系人" name="15">
           <Contact :rz="rz" />
         </van-collapse-item>
-        <!-- <van-collapse-item title="上传资料" name="16">
+        <van-collapse-item title="上传资料" name="16">
           <Upload :rz="rz" />
-        </van-collapse-item> -->
+        </van-collapse-item>
         <!-- <van-collapse-item title="" name="17">内容</van-collapse-item> -->
       </van-collapse>
 
@@ -108,6 +108,7 @@
             round
             native-type="button"
             color="linear-gradient(to right, #ff6034, #ee0a24)"
+            @click="onEndTalk"
           >
             结束谈单
           </van-button>
@@ -118,11 +119,21 @@
     <van-popup class="popup-rating" v-model="popupRatingShow">
       <Rating :score="score" />
     </van-popup>
+
+    <!-- <van-action-sheet
+      v-model="showActions"
+      description="请选择是否签单"
+      :actions="actions"
+      @select="onSelectActions"
+    />
+    <van-dialog v-model="showDialog" title="" show-cancel-button>
+      <img src="https://img.yzcdn.cn/vant/apple-3.jpg" />
+    </van-dialog> -->
   </div>
 </template>
 
 <script>
-// import Record from './components/Record'
+import Record from './components/Record'
 import Basic from './components/Basic'
 import JobInfo from './components/JobInfo'
 import CreditInfo from './components/CreditInfo'
@@ -138,13 +149,13 @@ import Education from './components/Education'
 import ZhuangXiu from './components/ZhuangXiu'
 import TaxLoan from './components/TaxLoan'
 import Contact from './components/Contact'
-// import Upload from './components/Upload'
+import Upload from './components/Upload'
 import Rating from './components/Rating'
 
 export default {
   name: 'Form',
   components: {
-    // Record,
+    Record,
     Basic,
     JobInfo,
     CreditInfo,
@@ -160,7 +171,7 @@ export default {
     ZhuangXiu,
     TaxLoan,
     Contact,
-    // Upload,
+    Upload,
     Rating,
   },
   // watch: {
@@ -181,6 +192,8 @@ export default {
       isSubmit: false, // 是否提交了表单
       popupRatingShow: false,
       score: {},
+      // showActions: false,
+      // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
   },
   created() {
@@ -211,7 +224,17 @@ export default {
     //     }, 1000)
     //   })
     // },
+    // onSelectActions(item, index) {
+    //   if (index === 0) {
+    //     this.$refs.record.stop()
+    //   } else if (index === 1) {
 
+    //   }
+    // },
+    onEndTalk() {
+      // this.showActions = true
+      this.$refs.record.stop()
+    },
     // 查看评级
     handleViewRating() {
       this.popupRatingShow = true

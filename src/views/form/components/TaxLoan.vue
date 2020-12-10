@@ -62,8 +62,8 @@
     <van-field name="zhizhaoyouguansi" label="营业执照名下是否有官司" autofocus>
       <template #input>
         <van-radio-group v-model="rz.zhizhaoyouguansi" direction="horizontal">
-          <van-radio name="1">有</van-radio>
-          <van-radio name="2">无</van-radio>
+          <van-radio name="1">是</van-radio>
+          <van-radio name="2">否</van-radio>
         </van-radio-group>
       </template>
     </van-field>
@@ -73,8 +73,8 @@
           v-model="rz.jingyingdizhishiyizhi"
           direction="horizontal"
         >
-          <van-radio name="1">有</van-radio>
-          <van-radio name="2">无</van-radio>
+          <van-radio name="1">是</van-radio>
+          <van-radio name="2">否</van-radio>
         </van-radio-group>
       </template>
     </van-field>

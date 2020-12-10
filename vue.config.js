@@ -1,9 +1,10 @@
-const path = require('path')
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
+// const path = require('path')
+// function resolve(dir) {
+//   return path.join(__dirname, dir)
+// }
 
 module.exports = {
+  publicPath: './',
   css: {
     loaderOptions: {
       less: {
@@ -23,21 +24,21 @@ module.exports = {
       },
     },
   },
-  publicPath: '',
-  // outputDir: '../erp/tandan',
-  filenameHashing: false,
-  productionSourceMap: false,
-  devServer: {
-    https: false,
-    // proxy: {
-    //   '/erp': {
-    //     // 将www.example.com映射为/apis
-    //     target: 'http://192.168.10.208:8008', // 接口域名
-    //     secure: false, // 如果是https接口，需要配置这个参数
-    //     changeOrigin: true // 是否跨域
-    //   }
-    // }
-  },
+  // publicPath: '',
+  // // outputDir: '../erp/tandan',
+  // filenameHashing: false,
+  // productionSourceMap: false,
+  // devServer: {
+  //   https: false,
+  //   // proxy: {
+  //   //   '/erp': {
+  //   //     // 将www.example.com映射为/apis
+  //   //     target: 'http://192.168.10.208:8008', // 接口域名
+  //   //     secure: false, // 如果是https接口，需要配置这个参数
+  //   //     changeOrigin: true // 是否跨域
+  //   //   }
+  //   // }
+  // },
   // chainWebpack: config => {
   //   config.resolve.alias.set('@assets', resolve('src/assets/'))
   // },

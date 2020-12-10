@@ -34,6 +34,7 @@ import {
   Steps,
   Tag,
   Uploader,
+  Icon,
 } from 'vant'
 
 import * as Api from './api'
@@ -64,6 +65,7 @@ Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tag)
 Vue.use(Uploader)
+Vue.use(Icon)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 
@@ -104,9 +106,10 @@ document.addEventListener('deviceready', async function() {
         console.log(`Yes :D  - ${v}`)
       } else {
         console.warn(`No :( - ${v}`)
-        permissions.requestPermissions(
+        permissions.requestPermission(
           v,
           function success(status) {
+            console.log('status: ', status)
             if (!status.hasPermission)
               console.warn(`${v} permission is not turned on`)
           },
@@ -123,6 +126,8 @@ document.addEventListener('deviceready', async function() {
     store,
     render: h => h(App),
   }).$mount('#app')
+
+  window.navigator.splashscreen.hide()
 })
 // } else {
 //   new Vue({

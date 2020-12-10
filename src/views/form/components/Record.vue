@@ -1,11 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <!-- <h1>This is an about page</h1>
     <van-button type="default" @click="record">录音</van-button>
     <van-button type="primary" @click="stop">停止</van-button>
     <van-button type="info" @click="play">播放</van-button>
     <van-button type="warning" @click="pause">暂停</van-button>
-    <van-button type="danger" @click="upload">上传</van-button>
+    <van-button type="danger" @click="upload">上传</van-button> -->
   </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
       fullPath: '',
       uploadUrl: process.env.VUE_APP_BASE_API + '/erp/api/api_audio',
     }
+  },
+  props: {
+    rz: {
+      type: Object,
+      required: true,
+    },
+    cus: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     fileName() {
@@ -65,6 +75,7 @@ export default {
       this.mediaRec.stopRecord()
       console.log(123)
       console.log(this.mediaRec.getCurrentPosition)
+      this.upload()
       // this.mediaRec.getCurrentPosition(
       //   position => {
       //     console.log(position)
