@@ -15,7 +15,7 @@ export default {
     return {
       mediaRec: null,
       fullPath: '',
-      uploadUrl: process.env.VUE_APP_BASE_API + '/erp/api/api_audio',
+      uploadUrl: this.$store.getters.baseUrl + '/erp/api/api_audio',
     }
   },
   props: {

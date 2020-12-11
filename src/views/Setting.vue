@@ -38,7 +38,7 @@ export default {
     return {
       navBarHeight: 46,
       pattern: /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/,
-      baseURL: this.$store.state.baseURL,
+      baseURL: this.$store.getters.baseURL,
     }
   },
   methods: {

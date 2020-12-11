@@ -11,7 +11,7 @@ const store = new Vuex.Store({
       compid: '',
     },
     hasLogin: false,
-    baseURL: '',
+    baseURL: 'https://jyw.jinchensoft.com',
   },
   getters: {
     userInfo: state => state.userInfo,

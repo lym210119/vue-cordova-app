@@ -14,7 +14,7 @@
     </van-nav-bar>
     <van-form @submit="onSubmit">
       <div class="logo">
-        <img alt="logo" src="../assets/logo.png" />
+        <img alt="logo" src="@/assets/logo.png" />
       </div>
       <van-field
         v-model="username"
