@@ -15,6 +15,7 @@ export function loginCompany(data) {
     url: '/erp/Api/api_company',
     method: 'post',
     data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   })
 }
 

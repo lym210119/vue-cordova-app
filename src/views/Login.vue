@@ -107,16 +107,15 @@ export default {
       })
     },
     onSelect(action) {
-      let params = {
-        compid: action.id,
-        username: this.username,
-        password: this.password,
-      }
-      this.$http.loginCompany(params).then(res => {
+      let formData = new FormData()
+      formData.append('compid', action.id)
+      formData.append('username', this.username)
+      formData.append('password', this.password)
+      this.$http.loginCompany(formData).then(res => {
         this.actionsShow = false
         console.log('res: ', res)
         let userInfo = res.info
-        userInfo.compid = params.compid
+        userInfo.compid = action.id
         this.$store.dispatch('login', userInfo).then(() => {
           this.$toast.success({
             message: res.msg,
