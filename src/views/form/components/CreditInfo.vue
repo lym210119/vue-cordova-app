@@ -160,7 +160,15 @@ export default {
   },
   data() {
     return {
-      loanArr: [],
+      loanArr: [
+        {
+          dkyinhang: '',
+          ifOrganization: '',
+          ifpiguo: '',
+          phjine: '',
+          ygjine: '',
+        },
+      ],
       cxnumArray: [
         { value: 1, name: '2个月小于3次以下' },
         { value: 2, name: '2个月小于5次以下' },
@@ -220,7 +228,8 @@ export default {
         }
       })
 
-      this.loanArr = a
+
+      this.loanArr = a.length ? a : this.loanArr
       console.log('this.loanArr: ', this.loanArr)
 
       // 征信查询次数赋值

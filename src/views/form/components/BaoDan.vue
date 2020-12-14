@@ -103,7 +103,15 @@ export default {
   },
   data() {
     return {
-      baodanArr: [],
+      baodanArr: [
+        {
+          bdgongsi: {},
+          bdjftype: '',
+          bdjine: '',
+          bdci: '',
+          bdtype: '',
+        },
+      ],
       showPickerInsuranceCompany: false,
       columnsInsuranceCompany: [
         { value: '1', name: '中国人寿' },
@@ -180,7 +188,7 @@ export default {
           }
         }
       })
-      this.baodanArr = a
+      this.baodanArr = a.length ? a : this.baodanArr
     },
     selectInsuranceCompany(i) {
       this.indexInsuranceCompany = i
