@@ -50,7 +50,7 @@
     <van-field name="rzWorkYear" label="工作年限">
       <template #input>
         <van-radio-group v-model="rz.rzWorkYear" direction="horizontal">
-          <van-radio name="3">有1年以内</van-radio>
+          <van-radio name="3">1年以内</van-radio>
           <van-radio name="1">1～3年</van-radio>
           <van-radio name="2">3年以上</van-radio>
         </van-radio-group>
