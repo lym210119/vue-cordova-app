@@ -11,7 +11,7 @@
         type="text"
         label="联系人姓名"
         placeholder="联系人姓名"
-        maxlength="20"
+        maxlength="10"
       />
       <van-field
         v-model="item.TEL"

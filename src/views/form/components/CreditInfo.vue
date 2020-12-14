@@ -187,7 +187,6 @@ export default {
   },
   methods: {
     dataFilter(name) {
-      console.log('this.rz: ', this.rz)
       const arr = Object.keys(this.rz)
         .filter(v => {
           return v.indexOf(name) > -1
@@ -227,7 +226,6 @@ export default {
           }
         }
       })
-
 
       this.loanArr = a.length ? a : this.loanArr
       console.log('this.loanArr: ', this.loanArr)

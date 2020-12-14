@@ -199,7 +199,7 @@ export default {
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
-    console.log('this.rz: ', this.rz)
+    console.log('this.rz222: ', this.rz)
   },
   mounted() {
     // this.onLoad()
@@ -313,13 +313,25 @@ export default {
             return
           }
         }
+        const arr = Object.keys(formdata)
+          .filter(v => v.includes('contact'))
+          .filter(v => v.includes('TEL'))
+        console.log('arr: ', arr)
+        const reg = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
+
+        for (let i = 0; i < arr.length; i++) {
+          let okey = arr[i]
+          if (!reg.test(formdata[okey])) {
+            this.$toast('联系人手机号格式错误，请重新输入')
+            return
+          }
+        }
 
         resolve()
       })
     },
     //提交表单
     onSubmit(e) {
-      console.log('e: ', e)
       e.smallLoanNum = 0
       Object.keys(e).map(v => {
         if (v.includes('ifOrganization') && e[v] === '2') {
@@ -333,6 +345,13 @@ export default {
       e.policeSwitch = +e.policeSwitch + ''
 
       this.validator(e).then(() => {
+        Object.keys(e).map(v => {
+          if (e[v] === 'undefined') {
+            console.log('v', v)
+            e[v] = ''
+          }
+        })
+        console.log('e: ', e)
         this.$http.submitInfo(e).then(res => {
           console.log('res: ', res)
           if (res.code === 1) {

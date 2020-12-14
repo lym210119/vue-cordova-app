@@ -123,6 +123,7 @@ export default {
       })
     },
     onLoad() {
+      console.log('onLoad: ')
       this.page++
       this.getCusList().then(res => {
         console.log('res: ', res)
@@ -142,6 +143,7 @@ export default {
       })
     },
     onRefresh() {
+      console.log('onRefresh: ')
       this.page = 0
       // this.onLoad()
       this.getCusList().then(() => {
