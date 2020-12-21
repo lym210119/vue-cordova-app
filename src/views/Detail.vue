@@ -136,10 +136,7 @@ export default {
   created() {
     this.getCusDetail()
   },
-  mounted() {
-    console.log('this.item: ', this.item)
-    console.log(this.$route.query)
-  },
+  mounted() {},
   methods: {
     toForm() {
       let data = {
@@ -157,7 +154,6 @@ export default {
         compid: this.$store.state.userInfo.compid,
       }
       this.$http.getCusDetail(params).then(res => {
-        console.log('res: ', res)
         if (res.code === 1) {
           this.infoCus = res.cus
           this.infoFk = res.fk

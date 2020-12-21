@@ -321,7 +321,7 @@ export default {
 
         for (let i = 0; i < arr.length; i++) {
           let okey = arr[i]
-          if (!reg.test(formdata[okey])) {
+          if (formdata[okey] && !reg.test(formdata[okey])) {
             this.$toast('联系人手机号格式错误，请重新输入')
             return
           }

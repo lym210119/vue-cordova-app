@@ -45,7 +45,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: process.env.CORDOVA_PLATFORM ? 'hash' : 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes,
 })

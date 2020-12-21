@@ -1,7 +1,7 @@
 <template>
   <div class="cell-item">
-    <div class="item-left" :style="`background-color: ${item.khfl.bgColor}`">
-      {{ item.khfl.name }}
+    <div class="item-left" :style="`background-color: ${item.bgColor}`">
+      {{ item.name }}
     </div>
     <div class="item-right">
       <div class="title">
@@ -18,11 +18,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      khfl: {},
+    }
+  },
   props: {
     item: {
       type: Object,
       reuqired: true,
     },
+  },
+  created() {
+
   },
 }
 </script>

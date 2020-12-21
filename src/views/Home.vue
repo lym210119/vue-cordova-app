@@ -129,7 +129,9 @@ export default {
         console.log('res: ', res)
         if (res.length) {
           let arr = res.map(v => {
-            v.khfl = this.formatterCusType(v.khfl)
+            const o = this.formatterCusType(v.khfl)
+            v.bgColor = o.bgColor
+            v.name = o.name
             return v
           })
           console.log('arr: ', arr)
