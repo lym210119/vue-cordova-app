@@ -34,6 +34,7 @@ const store = new Vuex.Store({
     },
     SETBASEURL: (state, url) => {
       state.baseURL = url
+      localStorage.setItem('store', JSON.stringify(state))
     },
   },
   actions: {

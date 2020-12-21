@@ -35,6 +35,7 @@ import {
   Tag,
   Uploader,
   Icon,
+  Progress,
 } from 'vant'
 
 import * as Api from './api'
@@ -66,6 +67,7 @@ Vue.use(Steps)
 Vue.use(Tag)
 Vue.use(Uploader)
 Vue.use(Icon)
+Vue.use(Progress)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 

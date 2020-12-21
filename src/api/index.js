@@ -55,6 +55,36 @@ export function uploadImages(data) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   })
 }
+
+// 上传录音
+export function uploadRecord(data) {
+  return request({
+    url: '/erp/api/api_audio',
+    method: 'post',
+    data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  })
+}
+
+// 上传切片，同时过滤已上传的切片
+export function uploadChunks(data) {
+  return request({
+    url: '/erp/api/api_audio',
+    method: 'post',
+    data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  })
+}
+
+// 上传切片，同时过滤已上传的切片
+export function mergeRequest(data) {
+  return request({
+    url: '/erp/api/api_audio',
+    method: 'post',
+    data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  })
+}
 // // 申请方案
 // applyScheme(data) {
 //   return minRequest.post("/erp/Api/apply_scheme", data);
