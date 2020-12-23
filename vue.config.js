@@ -43,8 +43,8 @@ module.exports = {
   //   config.resolve.alias.set('@assets', resolve('src/assets/'))
   // },
   configureWebpack: config => {
-    // if (process.env.NODE_ENV === 'production') {
-    if (!process.env.VUE_APP_DEBUG) {
+    if (process.env.NODE_ENV === 'production') {
+    // if (!process.env.VUE_APP_DEBUG) {
       // 为生产环境修改配置...
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [

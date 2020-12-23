@@ -240,6 +240,11 @@ export default {
     },
     // 查看评级
     handleViewRating() {
+      console.log('this.score: ', this.score)
+      if (!this.score.cusLevel) {
+        this.$toast.fail(this.score.msg)
+        return
+      }
       this.popupRatingShow = true
     },
     // 验证表单
@@ -293,6 +298,9 @@ export default {
         if (formdata.intoType === '1') {
           if (!formdata.propertyStatus) {
             this.$toast.fail('请选择产权情况')
+            return
+          } else if (formdata.propertyStatus !== '1') {
+            this.$toast.fail('产权情况不正常或没有资格')
             return
           }
         }

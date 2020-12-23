@@ -44,18 +44,18 @@
               <label class="item-label">身份证号</label>：
               <span>{{ infoCus.IDCARD || '' }}</span>
             </div>
-            <div class="tab-item">
+            <!-- <div class="tab-item">
               <label class="item-label">职业</label>：
               <span>{{ infoCus.JOB || '' }}</span>
-            </div>
+            </div> -->
             <div class="tab-item">
               <label class="item-label">所在城市</label>：
               <span>{{ infoCus.cityid || '' }}</span>
             </div>
-            <div class="tab-item">
+            <!-- <div class="tab-item">
               <label class="item-label">联系地址</label>：
               <span>{{ infoCus.ADDRESS || '' }}</span>
-            </div>
+            </div> -->
           </div>
         </van-tab>
         <van-tab title="服务信息">
@@ -72,7 +72,7 @@
               <label class="item-label">期望金额</label>：
               <span>{{ infoCus.WISHVAL || '' }}</span>
             </div>
-            <div class="tab-item">
+            <!-- <div class="tab-item">
               <label class="item-label">用款时长</label>：
               <span>{{ infoCus.DKD ? infoCus.DKD + infoCus.DKDT : '' }}</span>
             </div>
@@ -83,7 +83,7 @@
             <div class="tab-item">
               <label class="item-label">建议产品</label>：
               <span>{{ infoCus.jycp || '' }}</span>
-            </div>
+            </div> -->
             <div class="tab-item">
               <label class="item-label">上门状态</label>：
               <span>{{ infoCus.yxcd }}</span>

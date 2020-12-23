@@ -111,7 +111,7 @@ export default {
     upload() {
       console.log(this.fullPath)
       window.resolveLocalFileSystemURL(
-        this.filePath + 'P1HP.zip',
+        this.fullPath,
         dirEntry => {
           console.log(5666)
           console.log(dirEntry)
