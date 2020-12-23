@@ -70,7 +70,7 @@ Vue.use(Icon)
 Vue.use(Progress)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
-
+Toast.setDefaultOptions({ forbidClick: true })
 // if (
 //   Object.prototype.hasOwnProperty.call(window, 'cordova') &&
 //   typeof cordova === 'object'

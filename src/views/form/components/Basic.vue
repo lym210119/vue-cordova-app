@@ -28,6 +28,8 @@
       required
       autofocus
       maxlength="18"
+      :rules="[{ pattern, message: '身份证号不正确' }]"
+      @blur="onBlurIDCard"
     />
 
     <van-field
@@ -160,6 +162,7 @@ export default {
   },
   data() {
     return {
+      pattern: /(^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(^\d{6}(18|19|20)\d{2}(0[1-9]|10|11|12)([0-2]\d|30|31)\d{3}(\d|X|x)$)/,
       gender: '',
       columnsLoanAmount: [
         { value: '99', name: '暂不确定' },
@@ -208,6 +211,16 @@ export default {
     this.currentDate = this.rz.expectDate || this.currentDate
   },
   methods: {
+    // 身份证失去焦点时 自动计算出年龄出生
+    onBlurIDCard() {
+      if (this.rz.card && this.rz.card.length === 18) {
+        console.log(this.rz.card)
+        const currentYear = new Date().getFullYear()
+        const BornYear = this.rz.card.substring(6, 10)
+        console.log('BornYear: ', BornYear)
+        this.rz.age = currentYear - BornYear
+      }
+    },
     // 日期选择器确认 期望到账时间
     onConfirmDate(date) {
       let year = date.getFullYear()

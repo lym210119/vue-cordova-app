@@ -182,9 +182,15 @@ export default {
             console.log('data: ', data)
             console.log('data.code: ', data.code)
             console.log('options: ', options)
-            if (data.code === 100) {
-              this.$toast(data.msg)
-            }
+            // if (data.code === 100) {
+            this.$toast({
+              type: 'success',
+              message: '上传成功',
+              onClose: () => {
+                this.$router.push('/')
+              }
+            })
+            // }
           }
         },
         err => {
