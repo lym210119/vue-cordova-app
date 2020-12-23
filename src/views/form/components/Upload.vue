@@ -13,7 +13,7 @@
         />
       </template>
     </van-field>
-    <van-field v-model="rz.images" name="images" v-show="false" />
+    <van-field v-model="qmurl" name="qmurl" v-show="false" />
   </div>
 </template>
 
@@ -28,35 +28,35 @@ export default {
   data() {
     return {
       uploader: [],
+      qmurl: '',
     }
   },
   mounted() {
-    console.log('this.rz.qmurl: ', this.rz.qmurl)
-    if (this.rz.images) {
+    if (this.rz.qmurl) {
       this.uploader = this.rz.qmurl.split('|').map(v => {
         return { url: v }
       })
+      this.qmurl = this.rz.qmurl
     }
   },
   methods: {
-    afterRead(data) {
+    async afterRead(data) {
+      console.log('this.rz.qmurl1: ', this.rz.qmurl)
       // 此时可以自行将文件上传至服务器
       console.log('afterRead-file: ', data)
-      console.log('this.rz.qmurl', this.rz.qmurl)
       const compid = this.$store.state.userInfo.compid
       let formData = new FormData()
       formData.append('type', 'ipad')
       formData.append('file', data.file)
       formData.append('compid', compid)
       console.log('formData: ', formData)
-      this.$http.uploadImages(formData).then(res => {
-        console.log('res: ', res)
-        if (res.code === 100) {
-          this.$toast.success(res.msg)
-          this.rz.images += res.url + '|'
-          console.log('this.rz.images: ', this.rz.images)
-        }
-      })
+      const res = await this.$http.uploadImages(formData)
+      console.log('res: ', res)
+      if (res.code === 100) {
+        this.$toast.success(res.msg)
+        this.qmurl += res.url + '|'
+        console.log('this.qmurl: ', this.qmurl)
+      }
     },
     onOversize(file) {
       console.log(file)

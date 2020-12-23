@@ -174,15 +174,15 @@ export default {
     Upload,
     Rating,
   },
-  // watch: {
-  //   // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
-  //   cus(newV, oldV) {
-  //     console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
-  //   },
-  //   rz(newV, oldV) {
-  //     console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
-  //   },
-  // },
+  watch: {
+    // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
+    cus(newV, oldV) {
+      console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
+    },
+    rz(newV, oldV) {
+      console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
+    },
+  },
   data() {
     return {
       navBarHeight: 46,
@@ -199,6 +199,9 @@ export default {
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
+    if (!this.rz.qmurl) {
+      this.rz.qmurl = ''
+    }
     console.log('this.rz222: ', this.rz)
   },
   mounted() {
