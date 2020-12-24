@@ -5,9 +5,10 @@
         <van-uploader
           v-model="uploader"
           accept="image/*"
+          :before-read="beforeRead"
           :after-read="afterRead"
-          :max-count="10"
           multiple
+          :max-count="10"
           :max-size="5 * 1024 * 1024"
           @oversize="onOversize"
         />
@@ -41,50 +42,61 @@ export default {
   },
   methods: {
     async afterRead(data) {
-      console.log('this.rz.qmurl1: ', this.rz.qmurl)
       // 此时可以自行将文件上传至服务器
-      console.log('afterRead-file: ', data)
+      if (Array.isArray(data)) {
+        data.forEach(v => {
+          this.uploadImages(v)
+        })
+      } else {
+        this.uploadImages(data)
+      }
+    },
+    onOversize() {
+      this.$toast('文件大小不能超过 5M')
+    },
+    async uploadImages(data) {
+      console.log('data: ', data)
+
       const compid = this.$store.state.userInfo.compid
       let formData = new FormData()
       formData.append('type', 'ipad')
       formData.append('file', data.file)
       formData.append('compid', compid)
-      console.log('formData: ', formData)
+
       const res = await this.$http.uploadImages(formData)
-      console.log('res: ', res)
+
       if (res.code === 100) {
         this.$toast.success(res.msg)
         this.qmurl += res.url + '|'
-        console.log('this.qmurl: ', this.qmurl)
       }
-    },
-    onOversize(file) {
-      console.log(file)
-      this.$toast('文件大小不能超过 5M')
     },
     // 返回布尔值
     beforeRead(file) {
       console.log('file: ', file)
-      // if (file.type !== 'image/jpeg') {
-      //   this.$toast('请上传 jpg 格式图片')
-      //   return false
-      // }
-      // return true
+      const MAX_UPLOAD_NUM = 10
+      if (
+        Array.isArray(file) &&
+        file.length + this.uploader.length > MAX_UPLOAD_NUM
+      ) {
+        this.$toast.fail('最多只能上传10张！')
+        return false
+      }
+      return true
     },
-    // 返回 Promise
-    asyncBeforeRead(file) {
-      return new Promise((resolve, reject) => {
-        if (file.type !== 'image/jpeg') {
-          this.$toast('请上传 jpg 格式图片')
-          reject()
-        } else {
-          let img = new File(['foo'], 'bar.jpg', {
-            type: 'image/jpeg',
-          })
-          resolve(img)
-        }
-      })
-    },
+    // // 返回 Promise
+    // asyncBeforeRead(file) {
+    //   return new Promise((resolve, reject) => {
+    //     if (file.type !== 'image/jpeg') {
+    //       this.$toast('请上传 jpg 格式图片')
+    //       reject()
+    //     } else {
+    //       let img = new File(['foo'], 'bar.jpg', {
+    //         type: 'image/jpeg',
+    //       })
+    //       resolve(img)
+    //     }
+    //   })
+    // },
   },
 }
 </script>
