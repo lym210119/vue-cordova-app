@@ -11,12 +11,14 @@ const store = new Vuex.Store({
       compid: '',
     },
     hasLogin: false,
-    baseURL: 'https://jyw.jinchensoft.com',
+    baseUrl: 'https://jyw.jinchensoft.com',
+    baseUrlStatus: '1',
   },
   getters: {
     userInfo: state => state.userInfo,
     hasLogin: state => state.hasLogin,
-    baseURL: state => state.baseURL,
+    baseUrl: state => state.baseUrl,
+    baseUrlStatus: state => state.baseUrlStatus,
   },
   mutations: {
     LOGIN: (state, provider) => {
@@ -32,8 +34,9 @@ const store = new Vuex.Store({
       state.userInfo = {}
       localStorage.removeItem('store')
     },
-    SETBASEURL: (state, url) => {
-      state.baseURL = url
+    SETbaseUrl: (state, url) => {
+      state.baseUrl = url.baseUrl
+      state.baseUrlStatus = url.baseUrlStatus
       localStorage.setItem('store', JSON.stringify(state))
     },
   },
@@ -44,8 +47,8 @@ const store = new Vuex.Store({
     logout({ commit }) {
       commit('LOGOUT')
     },
-    setBaseUrl({ commit }, url) {
-      commit('SETBASEURL', url)
+    setbaseUrl({ commit }, url) {
+      commit('SETbaseUrl', url)
     },
   },
 })

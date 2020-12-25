@@ -9,6 +9,15 @@ export function login(data) {
   })
 }
 
+export function getSMS(data) {
+  return request({
+    url: '/erp/regist/msg',
+    method: 'post',
+    data,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  })
+}
+
 // 登陆时选择公司
 export function loginCompany(data) {
   return request({

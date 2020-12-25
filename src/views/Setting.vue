@@ -15,9 +15,22 @@
       :style="`padding-top: ${this.$StatusBarHeight + navBarHeight}px`"
     ></div>
     <van-form @submit="onSubmit">
+      <van-field name="baseUrlStatus" label="锦衣卫系统">
+        <template #input>
+          <van-radio-group
+            v-model="baseUrlStatus"
+            direction="horizontal"
+            @change="onChangeRadio"
+          >
+            <van-radio name="1">SAAS</van-radio>
+            <van-radio name="2">本地</van-radio>
+          </van-radio-group>
+        </template>
+      </van-field>
       <van-field
-        v-model="baseURL"
-        name="baseURL"
+        v-show="baseUrlStatus === '2'"
+        v-model="baseUrl"
+        name="baseUrl"
         label="锦衣卫地址"
         placeholder="锦衣卫地址"
         :rules="[{ pattern, message: '地址格式错误' }]"
@@ -38,14 +51,23 @@ export default {
     return {
       navBarHeight: 46,
       pattern: /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/,
-      baseURL: this.$store.getters.baseURL,
+      baseUrl: this.$store.getters.baseUrl,
+      baseUrlStatus: this.$store.getters.baseUrlStatus,
     }
   },
   methods: {
+    onChangeRadio(e) {
+      console.log('e: ', e)
+      if (e === '1') {
+        this.baseUrl = 'https://jyw.jinchensoft.com'
+      } else {
+        this.baseUrl = ''
+      }
+    },
     onSubmit(e) {
       console.log('e: ', e)
       // 调用 Vuex
-      this.$store.dispatch('setBaseUrl', e.baseURL).then(() => {
+      this.$store.dispatch('setbaseUrl', e).then(() => {
         this.$toast.success({
           message: '设置成功！',
           forbidClick: true,

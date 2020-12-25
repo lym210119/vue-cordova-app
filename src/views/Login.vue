@@ -19,10 +19,33 @@
       <van-field
         v-model="username"
         name="username"
-        label="账号"
-        placeholder="用户名/手机号"
-        :rules="[{ required: true, message: '请输入用户名/手机号' }]"
+        label="手机号"
+        placeholder="手机号"
+        maxlength="11"
+        :rules="[{ required: true, message: '请输入手机号' }]"
       />
+      <!-- <van-field
+        v-model="sms"
+        name="sms"
+        center
+        label="验证码"
+        type="digit"
+        placeholder="短信验证码"
+        maxlength="4"
+        :rules="[{ required: true, message: '请输入短信验证码' }]"
+      >
+        <template #button>
+          <van-button
+            size="small"
+            type="primary"
+            native-type="button"
+            @click="onClickSendSMS"
+            style="width: 80px"
+            >{{ smsText }}</van-button
+          >
+        </template>
+      </van-field> -->
+
       <van-field
         v-model="password"
         type="password"
@@ -54,7 +77,11 @@ export default {
     return {
       // logoSrc: require('../assets/logo.png'),
       username: '',
+      sms: '',
       password: '',
+      smsText: '发送验证码',
+      timer: null,
+      second: 60,
       actionsShow: false,
       actionsList: [],
     }
@@ -67,6 +94,34 @@ export default {
     // }
   },
   methods: {
+    // onClickSendSMS() {
+    //   if (!this.username) {
+    //     this.$toast('请输入手机号')
+    //     return
+    //   }
+    //   const form = new FormData()
+    //   form.append('phone', this.username)
+
+    //   this.$http.getSMS(form).then(res => {
+    //     console.log('res: ', res)
+    //     if (res === 1) {
+    //       this.$toast.success('发送成功')
+    //       this.timer = setInterval(() => {
+    //         if (this.second <= 0) {
+    //           clearInterval(this.timer)
+    //           this.smsText = '重新发送'
+    //           this.second = 60
+    //           return
+    //         }
+
+    //         this.second--
+    //         this.smsText = this.second + 's'
+    //       }, 1000)
+    //     } else {
+    //       this.$toast.fail('发送失败')
+    //     }
+    //   })
+    // },
     onClickRight() {
       this.$router.push('/setting')
     },
@@ -77,23 +132,28 @@ export default {
       }
       let formData = new FormData()
       formData.append('username', values.username)
+      formData.append('sms', values.sms)
       formData.append('password', values.password)
       this.$http.login(formData).then(res => {
         // 判断是否为多公司
         if (!res.comparr) {
-          let userInfo = res.info
-          userInfo.compid = res.compid
+          if (res.code === 1) {
+            let userInfo = res.info
+            userInfo.compid = res.compid
 
-          // 调用 Vuex
-          this.$store.dispatch('login', userInfo).then(() => {
-            this.$toast.success({
-              message: res.msg || '登录成功！',
-              forbidClick: true,
-              onClose: () => {
-                this.$router.push('/')
-              },
+            // 调用 Vuex
+            this.$store.dispatch('login', userInfo).then(() => {
+              this.$toast.success({
+                message: res.msg || '登录成功！',
+                forbidClick: true,
+                onClose: () => {
+                  this.$router.push('/')
+                },
+              })
             })
-          })
+          } else {
+            this.$toast.fail(res.msg)
+          }
         } else {
           this.actionsList = res.comparr.map(v => {
             return {
