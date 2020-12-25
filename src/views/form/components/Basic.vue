@@ -29,7 +29,7 @@
       autofocus
       maxlength="18"
       :rules="[{ pattern, message: '身份证号不正确' }]"
-      @blur="onBlurIDCard"
+      @input="onInputIDCard"
     />
 
     <van-field
@@ -41,6 +41,7 @@
       required
       autofocus
       maxlength="2"
+      ref="age"
     />
 
     <van-field
@@ -197,6 +198,7 @@ export default {
     }
   },
   mounted() {
+    console.log('this.$refs.IDCard', this.$refs.IDCard)
     if (this.rz.jkedu) {
       const index = this.columnsLoanAmount.findIndex(
         v => v.value === this.rz.jkedu,
@@ -212,7 +214,7 @@ export default {
   },
   methods: {
     // 身份证失去焦点时 自动计算出年龄出生
-    onBlurIDCard() {
+    onInputIDCard() {
       if (this.rz.card && this.rz.card.length === 18) {
         console.log(this.rz.card)
         const currentYear = new Date().getFullYear()

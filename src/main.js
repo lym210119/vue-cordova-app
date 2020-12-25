@@ -87,13 +87,14 @@ document.addEventListener('deviceready', async function() {
   Vue.prototype.$StatusBar = window.StatusBar
   Vue.prototype.$http = Api
 
+  console.log('window.StatusBar', window.StatusBar);
   if (window.StatusBar.height) {
     await window.StatusBar.height(function(height) {
       console.log('height: ', height)
       Vue.prototype.$StatusBarHeight = height
     })
   } else {
-    Vue.prototype.$StatusBarHeight = 0
+    Vue.prototype.$StatusBarHeight = 20
   }
 
   var permissions = window.cordova.plugins.permissions

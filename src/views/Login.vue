@@ -19,10 +19,10 @@
       <van-field
         v-model="username"
         name="username"
-        label="手机号"
-        placeholder="手机号"
+        label="账号"
+        placeholder="用户名/手机号"
         maxlength="11"
-        :rules="[{ required: true, message: '请输入手机号' }]"
+        :rules="[{ required: true, message: '请输入用户名或手机号' }]"
       />
       <!-- <van-field
         v-model="sms"
