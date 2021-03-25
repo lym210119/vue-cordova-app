@@ -29,9 +29,7 @@ export default {
       reuqired: true,
     },
   },
-  created() {
-
-  },
+  created() {},
 }
 </script>
 

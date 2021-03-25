@@ -75,6 +75,7 @@
         <icon height="152" src="resources/ios/icon/icon-76@2x.png" width="152" />
         <icon height="167" src="resources/ios/icon/icon-83.5@2x.png" width="167" />
         <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
+
         <splash height="1136" src="resources/ios/splash/Default-568h@2x~iphone.png" width="640" />
         <splash height="1334" src="resources/ios/splash/Default-667h.png" width="750" />
         <splash height="2688" src="resources/ios/splash/Default-2688h~iphone.png" width="1242" />
@@ -94,6 +95,14 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
+        <!-- <splash src="resources/ios/splash/Default@2x~iphone~anyany.png" />
+        <splash src="resources/ios/splash/Default@2x~iphone~comany.png" />
+        <splash src="resources/ios/splash/Default@2x~iphone~comcom.png" />
+        <splash src="resources/ios/splash/Default@3x~iphone~anyany.png" />
+        <splash src="resources/ios/splash/Default@3x~iphone~anycom.png" />
+        <splash src="resources/ios/splash/Default@3x~iphone~comany.png" />
+        <splash src="resources/ios/splash/Default@2x~ipad~anyany.png" />
+        <splash src="resources/ios/splash/Default@2x~ipad~comany.png" /> -->
     </platform>
     <config-file parent="/manifest" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
         <uses-permission android:name="android.permission.INTERNET" />
@@ -107,6 +116,7 @@
     <preference name="StatusBarStyle" value="lightContent" />
     <preference name="Fullscreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />
+    <!-- <preference name="AutoHideSplashScreen" value="false" /> -->
     <preference name="FadeSplashScreen" value="false" />
+    <!-- <preference name="SplashScreenDelay" value="3000" /> -->
 </widget>

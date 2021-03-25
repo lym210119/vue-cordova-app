@@ -188,7 +188,7 @@ export default {
               message: '上传成功',
               onClose: () => {
                 this.$router.push('/')
-              }
+              },
             })
             // }
           }

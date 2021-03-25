@@ -7,6 +7,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import FastClick from 'fastclick'
+
+import VueSignaturePad from 'vue-signature-pad'
 import {
   Toast,
   Button,
@@ -68,6 +70,8 @@ Vue.use(Tag)
 Vue.use(Uploader)
 Vue.use(Icon)
 Vue.use(Progress)
+
+Vue.use(VueSignaturePad)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 Toast.setDefaultOptions({ forbidClick: true })
@@ -87,7 +91,7 @@ document.addEventListener('deviceready', async function() {
   Vue.prototype.$StatusBar = window.StatusBar
   Vue.prototype.$http = Api
 
-  console.log('window.StatusBar', window.StatusBar);
+  console.log('window.StatusBar', window.StatusBar)
   if (window.StatusBar.height) {
     await window.StatusBar.height(function(height) {
       console.log('height: ', height)

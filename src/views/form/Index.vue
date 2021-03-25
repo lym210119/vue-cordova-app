@@ -69,7 +69,34 @@
         <van-collapse-item title="上传资料" name="16">
           <Upload :rz="rz" />
         </van-collapse-item>
-        <!-- <van-collapse-item title="" name="17">内容</van-collapse-item> -->
+        <van-collapse-item title="客户签字" name="17">
+          <div class="cus-sign" style="padding: 0 10px;">
+            <div class="sign-title">
+              <span>请在下方空白处写上您的姓名</span>
+              <van-button
+                plain
+                round
+                size="small"
+                type="danger"
+                native-type="button"
+                @click="clear"
+                >清空</van-button
+              >
+            </div>
+            <VueSignaturePad
+              id="signature"
+              width="100%"
+              height="500px"
+              ref="signaturePad"
+            />
+            <div style="line-height: 40px;text-align:right;color:#ccc;">
+              签字即表示同意
+              <span class="xy-btn" @click.stop="showServiceAgreement"
+                >《{{ this.companyName }}服务协议》</span
+              >
+            </div>
+          </div>
+        </van-collapse-item>
       </van-collapse>
 
       <div style="margin: 16px;text-align: center;">
@@ -120,6 +147,74 @@
       <Rating :score="score" />
     </van-popup>
 
+    <van-popup v-model="showXY" class="popup-xy">
+      <h3>{{ this.companyName }}服务协议</h3>
+      <p>
+        本协议是本人与{{ this.companyName }}所有者之间就{{
+          this.companyName
+        }}贷款服务等相关事宜所订立的契约，请仔细阅读本协议，本人完全同意和接受该协议的全部条款和内容，全面履行该协议的各项规定，享有和承担相应的权利和义务。
+      </p>
+      <p>
+        1、本人因需要办理贷款业务,特向{{
+          this.companyName
+        }}提供的本人及家庭成员和单位证件等资料复印件或原件均由本人提供，且真实合法。本人同意{{
+          this.companyName
+        }}将本人所提供的所有资料保存使用或转交至银行或其他相关机构。办理业务期间如本人提供的资料出现法律纠纷，
+        一切由本人承担！
+      </p>
+      <p>
+        2、本人承诺已知晓贷款资金须按合同约定用途使用，不得挪作他用，不得用于购房（按揭贷款除外），不得用于归还与购房相关的贷款（卖方赎楼贷款除外）及缴纳与购房相关的税费，不得用于归还信用卡，不得进入证券市场，不得用于股本权益性投资、有价证券、理财产品和期货、民间信贷等，不得用于投资古董，不得用于国家明令禁止或限制的生产、经营活动、领域和用途，不得通过转入本人或家庭成员的账户规避贷款用途管理。
+      </p>
+      <p>
+        3、本人承诺不以自己的名义为他人获得贷款，即不能将贷款资金转借他人使用；若违反此项规定，将贷款转借他人，则因此产生的责任及贷款风险将由本人承担
+      </p>
+      <p>
+        本人确认已经认真阅读并全面接受{{
+          this.companyName
+        }}全部条款，已充分知悉、理解本协议项下的权利、义务和责任，自愿承担由此产生的法律风险。
+      </p>
+      <div class="signature">
+        <span>客户签字：</span>
+        <img :src="signatureData" alt="" width="200" height="100" />
+      </div>
+    </van-popup>
+
+    <div
+      ref="html2canvas"
+      class="popup-xy"
+      v-show="xydemo"
+      style="position: absolute; left: 0; top: 0;z-index: -1;background-color:pink;"
+    >
+      <h3>{{ this.companyName }}服务协议</h3>
+      <p>
+        本协议是本人与{{ this.companyName }}所有者之间就{{
+          this.companyName
+        }}贷款服务等相关事宜所订立的契约，请仔细阅读本协议，本人完全同意和接受该协议的全部条款和内容，全面履行该协议的各项规定，享有和承担相应的权利和义务。
+      </p>
+      <p>
+        1、本人因需要办理贷款业务,特向{{
+          this.companyName
+        }}提供的本人及家庭成员和单位证件等资料复印件或原件均由本人提供，且真实合法。本人同意{{
+          this.companyName
+        }}将本人所提供的所有资料保存使用或转交至银行或其他相关机构。办理业务期间如本人提供的资料出现法律纠纷，
+        一切由本人承担！
+      </p>
+      <p>
+        2、本人承诺已知晓贷款资金须按合同约定用途使用，不得挪作他用，不得用于购房（按揭贷款除外），不得用于归还与购房相关的贷款（卖方赎楼贷款除外）及缴纳与购房相关的税费，不得用于归还信用卡，不得进入证券市场，不得用于股本权益性投资、有价证券、理财产品和期货、民间信贷等，不得用于投资古董，不得用于国家明令禁止或限制的生产、经营活动、领域和用途，不得通过转入本人或家庭成员的账户规避贷款用途管理。
+      </p>
+      <p>
+        3、本人承诺不以自己的名义为他人获得贷款，即不能将贷款资金转借他人使用；若违反此项规定，将贷款转借他人，则因此产生的责任及贷款风险将由本人承担
+      </p>
+      <p>
+        本人确认已经认真阅读并全面接受{{
+          this.companyName
+        }}全部条款，已充分知悉、理解本协议项下的权利、义务和责任，自愿承担由此产生的法律风险。
+      </p>
+      <div class="signature">
+        <span>客户签字：</span>
+        <img :src="signatureData" alt="" width="200" height="100" />
+      </div>
+    </div>
     <!-- <van-action-sheet
       v-model="showActions"
       description="请选择是否签单"
@@ -152,6 +247,8 @@ import Contact from './components/Contact'
 import Upload from './components/Upload'
 import Rating from './components/Rating'
 
+import html2canvas from 'html2canvas'
+import { dataURLtoBlob } from '../../utils'
 export default {
   name: 'Form',
   components: {
@@ -188,10 +285,15 @@ export default {
       navBarHeight: 46,
       cus: {},
       rz: {},
-      activeNames: Array.from({ length: 16 }, (x, i) => i + 1 + ''),
+      activeNames: Array.from({ length: 17 }, (x, i) => i + 1 + ''),
       isSubmit: false, // 是否提交了表单
       popupRatingShow: false,
       score: {},
+
+      showXY: false,
+      companyName: '申贷网',
+      signatureData: '',
+      xydemo: true,
       // showActions: false,
       // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
@@ -337,10 +439,23 @@ export default {
             return
           }
         }
-
+        const { isEmpty } = this.$refs.signaturePad.saveSignature()
+        console.log('isEmpty: ', isEmpty)
+        if (isEmpty) {
+          this.$toast('未签字')
+          return
+        }
         resolve()
       })
     },
+    showServiceAgreement() {
+      this.showXY = true
+    },
+    // 清空画板
+    clear() {
+      this.$refs.signaturePad.clearSignature()
+    },
+
     //提交表单
     onSubmit(e) {
       e.smallLoanNum = 0
@@ -363,16 +478,67 @@ export default {
           }
         })
         console.log('e: ', e)
-        this.$http.submitInfo(e).then(res => {
-          console.log('res: ', res)
-          if (res.code === 1) {
-            this.$toast.success('提交成功')
-            this.score = res.score
-            this.isSubmit = true
-          }
-        })
+
+        this.uploadSignature(e)
       })
     },
+    // 上传签名
+    uploadSignature(e) {
+      // this.xydemo = true
+      const { data } = this.$refs.signaturePad.saveSignature()
+      this.signatureData = data
+      const compid = this.$store.state.userInfo.compid
+      const formData = new FormData()
+      formData.append('type', 'ipad')
+      formData.append('file', dataURLtoBlob(data), 'signature.png')
+      formData.append('compid', compid)
+      this.$http.uploadImages(formData).then(res1 => {
+        console.log('res1: ', res1)
+        if (res1.code === 100) {
+          html2canvas(this.$refs.html2canvas, {
+            allowTaint: true,
+            useCORS: true,
+            logging: false,
+            // taintTest: false,
+            windowWidth: document.body.scrollWidth,
+            windowHeight: document.body.scrollHeight,
+            x: 0,
+            y: 0,
+          }).then(canvas => {
+            // document.body.appendChild(canvas)
+            const dataUrl = canvas.toDataURL('image/png')
+            console.log(dataUrl)
+            const form = new FormData()
+            form.append('type', 'ipad')
+            form.append('file', dataURLtoBlob(dataUrl), 'signature+xy.png')
+            form.append('compid', compid)
+            // 再次上传签名协议合成图
+            this.$http.uploadImages(form).then(res2 => {
+              console.log('res2: ', res2);
+              if (res2.code === 100) {
+                this.$toast.success('提交成功')
+                e.qmurl = res1.url + res2.url
+                console.log('e: ', e)
+                this.submitFormData(e)
+              }
+            })
+          })
+        }
+      })
+    },
+    // 请求提交
+    submitFormData(e) {
+      this.$http.submitInfo(e).then(res => {
+        console.log('res: ', res)
+        if (res.code === 1) {
+          this.$toast.success('提交成功')
+
+          this.score = res.score
+          this.isSubmit = true
+        }
+      })
+    },
+
     onClickLeft() {
       this.$dialog
         .confirm({
@@ -440,5 +606,40 @@ export default {
     padding: 10px;
     border-radius: 10px;
   }
+}
+.popup-xy {
+  width: 80%;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: pink;
+  color: #333;
+  h3 {
+    text-align: center;
+  }
+  p {
+    text-indent: 2em;
+  }
+}
+.signature {
+  text-align: right;
+  span,
+  img {
+    vertical-align: middle;
+  }
+}
+.cus-sign /deep/ .van-checkbox__label {
+  color: #ccc;
+}
+.sign-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+#signature {
+  border: 2px dashed #d3d3d3;
+  box-sizing: border-box;
 }
 </style>
