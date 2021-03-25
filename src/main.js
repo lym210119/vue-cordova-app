@@ -134,7 +134,10 @@ document.addEventListener('deviceready', async function() {
     render: h => h(App),
   }).$mount('#app')
 
-  window.navigator.splashscreen.hide()
+  setTimeout(function() {
+    navigator.splashscreen.hide()
+  }, 1000)
+  // navigator.splashscreen.hide()
 })
 // } else {
 //   new Vue({
