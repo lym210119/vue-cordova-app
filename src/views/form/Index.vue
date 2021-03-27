@@ -1,5 +1,5 @@
 <template>
-  <div class="form">
+  <div class="form" style="overflow:hidden;">
     <van-nav-bar
       title="录单"
       left-text="返回"
@@ -338,7 +338,7 @@ export default {
     // },
     onEndTalk() {
       // this.showActions = true
-      this.$refs.record.stop()
+      this.$refs.record.stop(false)
     },
     // 查看评级
     handleViewRating() {
@@ -494,7 +494,7 @@ export default {
       formData.append('compid', compid)
       this.$http.uploadImages(formData).then(res1 => {
         console.log('res1: ', res1)
-        if (res1.code === 100) {
+        if (res1.code == 100) {
           html2canvas(this.$refs.html2canvas, {
             allowTaint: true,
             useCORS: true,
@@ -515,9 +515,9 @@ export default {
             // 再次上传签名协议合成图
             this.$http.uploadImages(form).then(res2 => {
               console.log('res2: ', res2);
-              if (res2.code === 100) {
+              if (res2.code == 100) {
                 this.$toast.success('提交成功')
-                e.qmurl = res1.url + res2.url
+                e.qmurl = res1.url + '|' + res2.url
                 console.log('e: ', e)
                 this.submitFormData(e)
               }
@@ -530,7 +530,7 @@ export default {
     submitFormData(e) {
       this.$http.submitInfo(e).then(res => {
         console.log('res: ', res)
-        if (res.code === 1) {
+        if (res.code == 1) {
           this.$toast.success('提交成功')
 
           this.score = res.score
@@ -547,6 +547,7 @@ export default {
         })
         .then(() => {
           // on confirm
+          this.$refs.record.stop(true)
           this.$router.go(-1)
         })
         .catch(() => {

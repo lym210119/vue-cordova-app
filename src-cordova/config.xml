@@ -44,16 +44,16 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <edit-config file="*-Info.plist" mode="merge" target="NSMicrophoneUsageDescription">
+        <config-file file="*-Info.plist" mode="merge" target="NSMicrophoneUsageDescription">
             <string>need microphone access to record sounds</string>
-        </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" target="UIBackgroundModes">
+        </config-file>
+        <config-file file="*-Info.plist" mode="merge" target="UIBackgroundModes">
             <array>
                 <string>audio</string>
                 <string>fetch</string>
-		        <string>location</string>
+                <string>location</string>
             </array>
-        </edit-config>
+        </config-file>
         <icon height="57" src="res/ios/icon/icon.png" width="57" />
         <icon height="114" src="res/ios/icon/icon@2x.png" width="114" />
         <icon height="20" src="res/ios/icon/icon-20.png" width="20" />

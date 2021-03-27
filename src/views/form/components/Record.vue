@@ -63,20 +63,25 @@ export default {
     record() {
       this.$toast('开始录音')
       console.log(this.fullPath)
+      const src = this.fullPath.replace('file:///', 'cdvfile://')
+      console.log('src: ', src);
       this.mediaRec = new this.$Media(
-        this.fileName,
+        src,
         this.mediaSuccess,
         this.mediaError,
       )
       // 启动录制音频
       this.mediaRec.startRecord()
     },
-    stop() {
+    stop(isBack) {
       this.$toast('停止录音')
       this.mediaRec.stopRecord()
       console.log(123)
       console.log(this.mediaRec.getCurrentPosition)
-      this.upload()
+      console.log('isBack: ', isBack);
+      if (!isBack) {
+        this.upload()
+      }
       // this.mediaRec.getCurrentPosition(
       //   position => {
       //     console.log(position)
