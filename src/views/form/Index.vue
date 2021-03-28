@@ -514,7 +514,7 @@ export default {
             form.append('compid', compid)
             // 再次上传签名协议合成图
             this.$http.uploadImages(form).then(res2 => {
-              console.log('res2: ', res2);
+              console.log('res2: ', res2)
               if (res2.code == 100) {
                 this.$toast.success('提交成功')
                 e.qmurl = res1.url + '|' + res2.url

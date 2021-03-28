@@ -107,7 +107,18 @@
       </van-tabs>
     </div>
 
-    <div class="start-talk" @click="toForm()">开始谈单</div>
+    <van-button
+      class="start-talk"
+      :loading="loading"
+      :disabled="disabled"
+      loading-text="加载客户资料中..."
+      color="#3794df"
+      type="primary"
+      size="large"
+      @click="toForm()"
+    >
+      {{ '开始谈单' }}
+    </van-button>
   </div>
 </template>
 
@@ -131,6 +142,9 @@ export default {
       infoCus: '',
       infoFk: '',
       infoRz: '',
+
+      loading: true,
+      disabled: true,
     }
   },
   created() {
@@ -159,6 +173,8 @@ export default {
           this.infoFk = res.fk
           this.infoRz = res.rz
           this.tels = res.tels.join('|')
+          this.loading = false
+          this.disabled = false
         }
       })
     },
@@ -202,7 +218,6 @@ export default {
   bottom: 0;
   width: 100%;
   line-height: 46px;
-  background-color: #3794df;
   text-align: center;
   color: #fff;
   z-index: 2;
