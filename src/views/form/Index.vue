@@ -92,7 +92,7 @@
             <div style="line-height: 40px;text-align:right;color:#ccc;">
               签字即表示同意
               <span class="xy-btn" @click.stop="showServiceAgreement"
-                >《{{ this.companyName }}服务协议》</span
+                >《{{ this.companyName }}服务约定》</span
               >
             </div>
           </div>
@@ -147,32 +147,8 @@
       <Rating :score="score" />
     </van-popup>
 
-    <van-popup v-model="showXY" class="popup-xy">
-      <h3>{{ this.companyName }}服务协议</h3>
-      <p>
-        本协议是本人与{{ this.companyName }}所有者之间就{{
-          this.companyName
-        }}贷款服务等相关事宜所订立的契约，请仔细阅读本协议，本人完全同意和接受该协议的全部条款和内容，全面履行该协议的各项规定，享有和承担相应的权利和义务。
-      </p>
-      <p>
-        1、本人因需要办理贷款业务,特向{{
-          this.companyName
-        }}提供的本人及家庭成员和单位证件等资料复印件或原件均由本人提供，且真实合法。本人同意{{
-          this.companyName
-        }}将本人所提供的所有资料保存使用或转交至银行或其他相关机构，并授权机构可查询各类资质信息，包括但不限于征信、大数据、工商信息、法律诉讼等。办理业务期间如本人提供的资料出现法律纠纷，
-        一切由本人承担！
-      </p>
-      <p>
-        2、本人承诺已知晓贷款资金须按合同约定用途使用，不得挪作他用，不得用于购房（按揭贷款除外），不得用于归还与购房相关的贷款（卖方赎楼贷款除外）及缴纳与购房相关的税费，不得用于归还信用卡，不得进入证券市场，不得用于股本权益性投资、有价证券、理财产品和期货、民间信贷等，不得用于投资古董，不得用于国家明令禁止或限制的生产、经营活动、领域和用途，不得通过转入本人或家庭成员的账户规避贷款用途管理。
-      </p>
-      <p>
-        3、本人承诺不以自己的名义为他人获得贷款，即不能将贷款资金转借他人使用；若违反此项规定，将贷款转借他人，则因此产生的责任及贷款风险将由本人承担
-      </p>
-      <p>
-        本人确认已经认真阅读并全面接受{{
-          this.companyName
-        }}全部条款，已充分知悉、理解本协议项下的权利、义务和责任，自愿承担由此产生的法律风险。
-      </p>
+    <van-popup v-model="showXY" class="popup-xy" style="height: 80%;">
+      <XieYi />
       <div class="signature">
         <span>客户签字：</span>
         <img :src="signatureData" alt="" width="200" height="100" />
@@ -185,31 +161,7 @@
       v-show="xydemo"
       style="position: absolute; left: 0; top: 0;z-index: -1;background-color:pink;"
     >
-      <h3>{{ this.companyName }}服务协议</h3>
-      <p>
-        本协议是本人与{{ this.companyName }}所有者之间就{{
-          this.companyName
-        }}贷款服务等相关事宜所订立的契约，请仔细阅读本协议，本人完全同意和接受该协议的全部条款和内容，全面履行该协议的各项规定，享有和承担相应的权利和义务。
-      </p>
-      <p>
-        1、本人因需要办理贷款业务,特向{{
-          this.companyName
-        }}提供的本人及家庭成员和单位证件等资料复印件或原件均由本人提供，且真实合法。本人同意{{
-          this.companyName
-        }}将本人所提供的所有资料保存使用或转交至银行或其他相关机构，并授权机构可查询各类资质信息，包括但不限于征信、大数据、工商信息、法律诉讼等。办理业务期间如本人提供的资料出现法律纠纷，
-        一切由本人承担！
-      </p>
-      <p>
-        2、本人承诺已知晓贷款资金须按合同约定用途使用，不得挪作他用，不得用于购房（按揭贷款除外），不得用于归还与购房相关的贷款（卖方赎楼贷款除外）及缴纳与购房相关的税费，不得用于归还信用卡，不得进入证券市场，不得用于股本权益性投资、有价证券、理财产品和期货、民间信贷等，不得用于投资古董，不得用于国家明令禁止或限制的生产、经营活动、领域和用途，不得通过转入本人或家庭成员的账户规避贷款用途管理。
-      </p>
-      <p>
-        3、本人承诺不以自己的名义为他人获得贷款，即不能将贷款资金转借他人使用；若违反此项规定，将贷款转借他人，则因此产生的责任及贷款风险将由本人承担
-      </p>
-      <p>
-        本人确认已经认真阅读并全面接受{{
-          this.companyName
-        }}全部条款，已充分知悉、理解本协议项下的权利、义务和责任，自愿承担由此产生的法律风险。
-      </p>
+      <XieYi />
       <div class="signature">
         <span>客户签字：</span>
         <img :src="signatureData" alt="" width="200" height="100" />
@@ -246,6 +198,7 @@ import TaxLoan from './components/TaxLoan'
 import Contact from './components/Contact'
 import Upload from './components/Upload'
 import Rating from './components/Rating'
+import XieYi from './components/XieYi'
 
 import html2canvas from 'html2canvas'
 import { dataURLtoBlob } from '../../utils'
@@ -270,6 +223,7 @@ export default {
     Contact,
     Upload,
     Rating,
+    XieYi,
   },
   watch: {
     // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
@@ -610,7 +564,7 @@ export default {
   }
 }
 .popup-xy {
-  width: 80%;
+  width: 85%;
   padding: 15px;
   box-sizing: border-box;
   border-radius: 4px;
