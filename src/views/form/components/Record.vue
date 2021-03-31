@@ -120,6 +120,7 @@ export default {
             const fileReader = new FileReader()
             fileReader.onloadend = function() {
               fileReader.readAsArrayBuffer(file)
+              console.log('file: ', file);
               console.log(file)
             }
             this.uploadFileFn(file)
