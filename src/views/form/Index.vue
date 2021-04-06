@@ -247,7 +247,7 @@ export default {
       showXY: false,
       companyName: '申贷网',
       signatureData: '',
-      xydemo: true,
+      xydemo: false,
       // showActions: false,
       // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
@@ -438,7 +438,7 @@ export default {
     },
     // 上传签名
     uploadSignature(e) {
-      // this.xydemo = true
+      this.xydemo = true
       const { data } = this.$refs.signaturePad.saveSignature()
       this.signatureData = data
       const compid = this.$store.state.userInfo.compid
@@ -470,6 +470,7 @@ export default {
             this.$http.uploadImages(form).then(res2 => {
               console.log('res2: ', res2)
               if (res2.code == 100) {
+                this.xydemo = false
                 this.$toast.success('提交成功')
                 e.qmurl = res1.url + '|' + res2.url
                 console.log('e: ', e)
