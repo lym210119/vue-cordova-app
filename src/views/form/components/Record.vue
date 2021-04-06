@@ -65,7 +65,7 @@ export default {
       console.log(this.fullPath)
       const src = this.fullPath.replace('file:///', 'cdvfile://')
       console.log('src: ', src)
-      this.mediaRec = new this.$Media(src, this.mediaSuccess, this.mediaError)
+      this.mediaRec = new this.$Media(this.fullPath, this.mediaSuccess, this.mediaError)
       // 启动录制音频
       this.mediaRec.startRecord()
     },
