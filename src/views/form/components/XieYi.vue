@@ -78,7 +78,7 @@ export default {
     text-align: center;
   }
   h4 {
-    margin: 5px 0;
+    margin: 0;
   }
   p {
     margin: 0;
