@@ -111,8 +111,10 @@ export default {
 
     upload() {
       console.log(this.fullPath)
+      console.log('this.filePath: ', this.filePath);
       window.resolveLocalFileSystemURL(
-        this.fullPath,
+        // this.fullPath,
+        this.filePath + '1618282122048.aac',
         dirEntry => {
           console.log(5666)
           console.log(dirEntry)

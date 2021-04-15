@@ -46,10 +46,10 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
     // if (!process.env.VUE_APP_DEBUG) {
       // 为生产环境修改配置...
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
-      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
-        'console.log',
-      ]
+      // config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      // config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+      //   'console.log',
+      // ]
     } else {
       // 为开发环境修改配置...
       // config.plugins.push(new VConsolePlugin({ enable: !!argv.debug }))
