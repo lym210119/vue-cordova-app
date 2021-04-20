@@ -27,6 +27,9 @@
         <van-collapse-item title="职业信息" name="2">
           <JobInfo :rz="rz" />
         </van-collapse-item>
+        <van-collapse-item title="贷款信息" name="18">
+          <Loans :rz="rz" :cus="cus"/>
+        </van-collapse-item>
         <van-collapse-item title="信用信息" name="3">
           <CreditInfo :rz="rz" />
         </van-collapse-item>
@@ -199,6 +202,7 @@ import Contact from './components/Contact'
 import Upload from './components/Upload'
 import Rating from './components/Rating'
 import XieYi from './components/XieYi'
+import Loans from './components/Loans'
 
 import html2canvas from 'html2canvas'
 import { dataURLtoBlob } from '../../utils'
@@ -224,6 +228,7 @@ export default {
     Upload,
     Rating,
     XieYi,
+    Loans
   },
   watch: {
     // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
@@ -239,7 +244,7 @@ export default {
       navBarHeight: 46,
       cus: {},
       rz: {},
-      activeNames: Array.from({ length: 17 }, (x, i) => i + 1 + ''),
+      activeNames: Array.from({ length: 18 }, (x, i) => i + 1 + ''),
       isSubmit: false, // 是否提交了表单
       popupRatingShow: false,
       score: {},

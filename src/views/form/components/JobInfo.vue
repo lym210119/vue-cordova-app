@@ -4,9 +4,9 @@
       <template #input>
         <van-radio-group v-model="rz.zhiye" direction="horizontal">
           <van-radio name="1">法人代表</van-radio>
-          <van-radio name="2">优质精英</van-radio>
+          <van-radio name="2">国企事业单位</van-radio>
           <van-radio name="3">普通受薪</van-radio>
-          <van-radio name="4">现金流</van-radio>
+          <van-radio name="4">自雇人士</van-radio>
         </van-radio-group>
       </template>
     </van-field>
@@ -32,8 +32,18 @@
     <van-field name="ifzhizhao" label="有无执照" autofocus>
       <template #input>
         <van-radio-group v-model="rz.ifzhizhao" direction="horizontal">
-          <van-radio name="1">有</van-radio>
+          <van-radio name="1">真实经营</van-radio>
           <van-radio name="2">无</van-radio>
+          <van-radio name="3">空壳</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
+
+    <van-field name="operatingMainBody" label="经营主体" autofocus>
+      <template #input>
+        <van-radio-group v-model="rz.operatingMainBody" direction="horizontal">
+          <van-radio name="1">公司</van-radio>
+          <van-radio name="2">个人</van-radio>
         </van-radio-group>
       </template>
     </van-field>
@@ -46,6 +56,19 @@
       placeholder="所占股份（%）"
       maxlength="3"
     />
+
+    <van-field name="nashuipingji" label="纳税评级" autofocus>
+      <template #input>
+        <van-radio-group v-model="rz.nashuipingji" direction="horizontal">
+          <van-radio name="1">A</van-radio>
+          <van-radio name="2">B</van-radio>
+          <van-radio name="3">C</van-radio>
+          <van-radio name="4">D</van-radio>
+          <van-radio name="5">M</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
+
 
     <van-field name="rzWorkYear" label="工作年限">
       <template #input>
@@ -112,6 +135,22 @@
       placeholder="月净收入（元/月）"
       maxlength="10"
     />
+    <van-field
+      v-model="rz.publicCurrentWater"
+      name="publicCurrentWater"
+      type="number"
+      label="对公流水"
+      placeholder="对公流水（万元/年）"
+      maxlength="10"
+    />
+    <van-field
+      v-model="rz.personalWater"
+      name="personalWater"
+      type="number"
+      label="个人流水"
+      placeholder="个人流水（万元/年）"
+      maxlength="10"
+    />
     <van-field name="xugua" label="需挂靠单位" required autofocus>
       <template #input>
         <van-radio-group v-model="rz.xugua" direction="horizontal">
@@ -152,6 +191,14 @@
       placeholder="副业收入（元/月）"
       maxlength="10"
     />
+    <van-field name="isInvolveTheCase" label="是否涉案">
+      <template #input>
+        <van-radio-group v-model="rz.isInvolveTheCase" direction="horizontal">
+          <van-radio name="1">是</van-radio>
+          <van-radio name="2">否</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
   </div>
 </template>
 

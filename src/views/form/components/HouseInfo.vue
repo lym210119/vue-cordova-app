@@ -1,20 +1,37 @@
 <template>
   <div class="house-info">
-    <van-field name="propertyStatus" label="产权情况" required>
+    <van-field
+      v-model="fieldValue"
+      is-link
+      readonly
+      label="地区"
+      placeholder="请选择所在地区"
+      @click="show = true"
+    />
+    <van-popup v-model="show" round position="bottom">
+      <van-cascader
+        v-model="cascaderValue"
+        title="请选择所在地区"
+        :options="options"
+        active-color="#1ab394"
+        @close="show = false"
+        @change="onChange"
+        @finish="onFinish"
+      />
+    </van-popup>
+    <van-field
+      v-model="rz.fwaddress"
+      name="fwaddress"
+      type="text"
+      label="房屋详细地址"
+      placeholder="房屋详细地址"
+      maxlength="20"
+    />
+    <van-field name="rzHouseLocation" label="房屋所在地">
       <template #input>
-        <van-radio-group v-model="rz.propertyStatus" direction="horizontal">
-          <van-radio name="1">正常</van-radio>
-          <van-radio name="2">产权涉及查封</van-radio>
-          <van-radio name="3">未成年人</van-radio>
-          <van-radio name="4">70岁以上</van-radio>
-        </van-radio-group>
-      </template>
-    </van-field>
-    <van-field name="rzDyHouseType" label="房型">
-      <template #input>
-        <van-radio-group v-model="rz.rzDyHouseType" direction="horizontal">
-          <van-radio name="1">住宅</van-radio>
-          <van-radio name="2">非住宅</van-radio>
+        <van-radio-group v-model="rz.rzHouseLocation" direction="horizontal">
+          <van-radio name="1">本地</van-radio>
+          <van-radio name="2">外地</van-radio>
         </van-radio-group>
       </template>
     </van-field>
@@ -35,65 +52,34 @@
         </van-radio-group>
       </template>
     </van-field>
-    <van-field name="rzDyStructChange" label="更改结构">
+    <van-field name="propertyStatus" label="产权情况" required>
       <template #input>
-        <van-radio-group v-model="rz.rzDyStructChange" direction="horizontal">
-          <van-radio name="1">有</van-radio>
-          <van-radio name="2">无</van-radio>
+        <van-radio-group v-model="rz.propertyStatus" direction="horizontal">
+          <van-radio name="1">正常</van-radio>
+          <van-radio name="2">产权涉及查封</van-radio>
+          <van-radio name="3">未成年人</van-radio>
+          <van-radio name="4">70岁以上</van-radio>
         </van-radio-group>
       </template>
     </van-field>
-    <div class="my-section">
-      <span>全款房 </span>
-    </div>
-    <van-field
-      v-model="rz.fwaddress"
-      name="fwaddress"
-      type="text"
-      label="房屋详细地址"
-      placeholder="房屋详细地址"
-      maxlength="20"
-    />
-    <van-field
-      v-model="rz.fwmianji"
-      name="fwmianji"
-      type="number"
-      label="建筑面积"
-      placeholder="建筑面积(㎡)"
-      maxlength="20"
-    />
-    <van-field
-      v-model="rz.fwzongjia"
-      name="fwzongjia"
-      type="number"
-      label="购买总价"
-      placeholder="购买总价(万元)"
-      maxlength="20"
-    />
-    <van-field
-      v-model="rz.fwpinggu"
-      name="fwpinggu"
-      type="number"
-      label="评估单价"
-      placeholder="评估单价(元/㎡)"
-      maxlength="20"
-    />
-    <van-field name="ifCertificate" label="是否办证">
+    <van-field name="rzDyHouseType" label="房型">
       <template #input>
-        <van-radio-group v-model="rz.ifCertificate" direction="horizontal">
-          <van-radio name="1">是</van-radio>
-          <van-radio name="2">否</van-radio>
+        <van-radio-group v-model="rz.rzDyHouseType" direction="horizontal">
+          <van-radio name="1">住宅</van-radio>
+          <van-radio name="2">非住宅</van-radio>
         </van-radio-group>
       </template>
     </van-field>
-    <van-field name="rzHouseLocation" label="房屋所在地">
+    <van-field name="rzBuyStatus" label="购买情况">
       <template #input>
-        <van-radio-group v-model="rz.rzHouseLocation" direction="horizontal">
-          <van-radio name="1">本地</van-radio>
-          <van-radio name="2">外地</van-radio>
+        <van-radio-group v-model="rz.rzBuyStatus" direction="horizontal">
+          <van-radio name="1">首套</van-radio>
+          <van-radio name="2">二套</van-radio>
+          <van-radio name="3">多套</van-radio>
         </van-radio-group>
       </template>
     </van-field>
+    
     <van-field
       readonly
       clickable
@@ -122,41 +108,168 @@
         @cancel="showPickerHouseType = false"
       />
     </van-popup>
-    <div class="my-section">
-      <span>按揭房 </span>
-    </div>
-    <van-field
-      v-model="rz.anjietao"
-      name="anjietao"
-      type="number"
-      label="数量"
-      placeholder="数量"
-      maxlength="20"
-    />
-    <van-field
-      v-model="rz.yuegong"
-      name="yuegong"
-      type="number"
-      label="月供金额"
-      placeholder="月供金额(元)"
-      maxlength="20"
-    />
-    <van-field
-      v-model="rz.qishu"
-      name="qishu"
-      type="number"
-      label="已还期数"
-      placeholder="已还期数"
-      maxlength="20"
-    />
-    <van-field name="suozaidi" label="房屋所在地">
+
+    <van-field name="ifCertificate" label="是否办证">
       <template #input>
-        <van-radio-group v-model="rz.suozaidi" direction="horizontal">
-          <van-radio name="1">本地</van-radio>
-          <van-radio name="2">外地</van-radio>
+        <van-radio-group v-model="rz.ifCertificate" direction="horizontal">
+          <van-radio name="1">是</van-radio>
+          <van-radio name="2">否</van-radio>
         </van-radio-group>
       </template>
     </van-field>
+    <van-field name="rzDyStructChange" label="更改结构">
+      <template #input>
+        <van-radio-group v-model="rz.rzDyStructChange" direction="horizontal">
+          <van-radio name="1">有</van-radio>
+          <van-radio name="2">无</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
+    <van-field
+      v-model="rz.fwmianji"
+      name="fwmianji"
+      type="number"
+      label="房产面积"
+      placeholder="房产面积(㎡)"
+      maxlength="20"
+    />
+    <van-field
+      v-model="rz.communityName"
+      name="communityName"
+      type="text"
+      label="小区名称"
+      placeholder="小区名称"
+      maxlength="20"
+    />
+    <van-field name="isSchoolArea" label="是否学区">
+      <template #input>
+        <van-radio-group v-model="rz.isSchoolArea" direction="horizontal">
+          <van-radio name="1">是</van-radio>
+          <van-radio name="2">否</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
+    <van-field
+      v-model="rz.schoolAreaName"
+      name="schoolAreaName"
+      type="text"
+      label="学区名称"
+      placeholder="学区名称"
+      maxlength="20"
+    />
+    <van-field
+      v-model="rz.fwzongjia"
+      name="fwzongjia"
+      type="number"
+      label="购买总价"
+      placeholder="购买总价(万元)"
+      maxlength="20"
+    />
+
+    <van-field name="mortgageStatus" label="抵押物状态">
+      <template #input>
+        <van-radio-group v-model="rz.mortgageStatus" direction="horizontal">
+          <van-radio name="1">全款</van-radio>
+          <van-radio name="2">抵押房</van-radio>
+        </van-radio-group>
+      </template>
+    </van-field>
+
+    <div class="quankuan">
+      <van-field
+        v-model="rz.fwpinggu"
+        name="fwpinggu"
+        type="number"
+        label="评估单价"
+        placeholder="评估单价(万元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.shellPrice"
+        name="shellPrice"
+        type="number"
+        label="贝壳价格"
+        placeholder="贝壳价格(万元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.otherAssessments"
+        name="otherAssessments"
+        type="number"
+        label="其他评估"
+        placeholder="其他评估(万元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.passBridge"
+        name="passBridge"
+        type="number"
+        label="过桥金额"
+        placeholder="过桥金额(万元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.redemon"
+        name="redemon"
+        type="number"
+        label="赎楼金额"
+        placeholder="赎楼金额(万元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.redemonNode"
+        name="redemonNode"
+        type="text"
+        label="赎楼节点"
+        placeholder="赎楼节点"
+        maxlength="20"
+      />
+    </div>
+
+    <div class="diya">
+      <van-field
+        v-model="rz.originalLoanBank"
+        name="originalLoanBank"
+        type="text"
+        label="原贷款行"
+        placeholder="原贷款行"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.loanAmount"
+        name="loanAmount"
+        type="text"
+        label="贷款金额"
+        placeholder="贷款金额"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.yuegong"
+        name="yuegong"
+        type="number"
+        label="月供金额"
+        placeholder="月供金额(元)"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.qishu"
+        name="qishu"
+        type="number"
+        label="已还期数"
+        placeholder="已还期数"
+        maxlength="20"
+      />
+      <van-field
+        v-model="rz.loanBalance"
+        name="loanBalance"
+        type="number"
+        label="贷款余额"
+        placeholder="贷款余额"
+        maxlength="20"
+      />
+
+    </div>
+
   </div>
 </template>
 
@@ -170,6 +283,17 @@ export default {
   },
   data() {
     return {
+      show: false,
+      fieldValue: '',
+      cascaderValue: '',
+      options: [
+        {
+          text: '浙江省',
+          value: '330000',
+          children: [],
+        },
+      ],
+
       showPickerHouseType: false,
       columnsHouseType: [
         { value: '1', name: '别墅' },
@@ -194,6 +318,21 @@ export default {
     this.rz.rzDyThat = this.rz.rzDyThat + ''
   },
   methods: {
+    onChange({ value }) {
+      if (value === this.options[0].value) {
+        setTimeout(() => {
+          this.options[0].children = [
+            { text: '杭州市', value: '330100' },
+            { text: '宁波市', value: '330200' },
+          ];
+        }, 500);
+      }
+    },
+    // 全部选项选择完毕后，会触发 finish 事件
+    onFinish({ selectedOptions }) {
+      this.show = false
+      this.fieldValue = selectedOptions.map(option => option.text).join('/')
+    },
     // 选择器确认 房屋类型
     onConfirmHouseType(e) {
       this.valueHouseType = e.name

@@ -38,6 +38,7 @@ import {
   Uploader,
   Icon,
   Progress,
+  Cascader
 } from 'vant'
 
 import * as Api from './api'
@@ -70,6 +71,7 @@ Vue.use(Tag)
 Vue.use(Uploader)
 Vue.use(Icon)
 Vue.use(Progress)
+Vue.use(Cascader)
 
 Vue.use(VueSignaturePad)
 Vue.config.productionTip = false
