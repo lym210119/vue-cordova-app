@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     LOGOUT: state => {
       state.hasLogin = false
       state.userInfo = {}
-      localStorage.removeItem('store')
+      localStorage.setItem('store', JSON.stringify(state))
     },
     SETBASEURL: (state, url) => {
       state.baseURL = url.baseURL
