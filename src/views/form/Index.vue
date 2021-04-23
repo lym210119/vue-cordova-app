@@ -27,43 +27,44 @@
         <van-collapse-item title="职业信息" name="2">
           <JobInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="贷款信息" name="18">
-          <Loans :rz="rz" :cus="cus"/>
-        </van-collapse-item>
         <van-collapse-item title="信用信息" name="3">
           <CreditInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="房产信息" name="4">
+        <van-collapse-item title="贷款信息" name="18">
+          <Loans :rz="rz" :cus="cus"/>
+        </van-collapse-item>
+
+        <van-collapse-item title="房产信息" name="4" v-show="rz.intoType === '1'">
           <HouseInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="保单信息" name="5">
+        <van-collapse-item title="保单信息" name="5" v-show="rz.intoType === '2'">
           <BaoDan :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="车产信息" name="6">
+        <van-collapse-item title="车产信息" name="6" v-show="rz.intoType === '3'">
           <CarInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="公积金" name="7">
+        <van-collapse-item title="公积金" name="7" v-show="rz.intoType === '2'">
           <GongJiJin :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="社保信息" name="8">
+        <van-collapse-item title="社保信息" name="8" v-show="rz.intoType === '2'">
           <SheBao :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="打卡工资" name="9">
+        <van-collapse-item title="打卡工资" name="9" v-show="rz.intoType === '2'">
           <Wage :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="微粒贷" name="10">
+        <van-collapse-item title="微粒贷" name="10" v-show="rz.intoType === '2'">
           <WeiLiDai :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="信用卡" name="11">
+        <van-collapse-item title="信用卡" name="11" v-show="rz.intoType === '2'">
           <CreditCard :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="学历" name="12">
+        <van-collapse-item title="学历" name="12" v-show="rz.intoType === '2'">
           <Education :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="装修贷" name="13">
+        <van-collapse-item title="装修贷" name="13" v-show="rz.intoType === '2'">
           <ZhuangXiu :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="税贷" name="14">
+        <van-collapse-item title="税贷" name="14" v-show="rz.intoType === '4'">
           <TaxLoan :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="添加联系人" name="15">
