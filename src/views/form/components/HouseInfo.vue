@@ -8,14 +8,18 @@
       placeholder="请选择所在地区"
       @click="show = true"
     />
+    <van-field v-model="rz.fwsheng" name="fwsheng" v-show="false" />
+    <van-field v-model="rz.fwshengval" name="fwshengval" v-show="false" />
+    <van-field v-model="rz.fwshi" name="fwshi" v-show="false" />
+    <van-field v-model="rz.fwshival" name="fwshival" v-show="false" />
     <van-popup v-model="show" round position="bottom">
       <van-cascader
         v-model="cascaderValue"
         title="请选择所在地区"
         :options="options"
+        :field-names="fieldNames"
         active-color="#1ab394"
         @close="show = false"
-        @change="onChange"
         @finish="onFinish"
       />
     </van-popup>
@@ -79,7 +83,7 @@
         </van-radio-group>
       </template>
     </van-field>
-    
+
     <van-field
       readonly
       clickable
@@ -267,9 +271,7 @@
         placeholder="贷款余额"
         maxlength="20"
       />
-
     </div>
-
   </div>
 </template>
 
@@ -284,8 +286,13 @@ export default {
   data() {
     return {
       show: false,
-      fieldValue: '',
+      fieldValue: this.rz.fwshengval + '/' + this.rz.fwshival,
       cascaderValue: '',
+      fieldNames: {
+        text: 'VAL',
+        value: 'KEYID',
+        children: 'children',
+      },
       options: [
         {
           text: '浙江省',
@@ -309,6 +316,11 @@ export default {
     }
   },
   mounted() {
+    this.$http
+      .getAllAreaInfo({ compId: this.$store.state.userInfo.compid })
+      .then(res => {
+        this.options = res.data
+      })
     const index = this.columnsHouseType.findIndex(
       v => v.value === this.rz.fwtype,
     )
@@ -318,20 +330,15 @@ export default {
     this.rz.rzDyThat = this.rz.rzDyThat + ''
   },
   methods: {
-    onChange({ value }) {
-      if (value === this.options[0].value) {
-        setTimeout(() => {
-          this.options[0].children = [
-            { text: '杭州市', value: '330100' },
-            { text: '宁波市', value: '330200' },
-          ];
-        }, 500);
-      }
-    },
     // 全部选项选择完毕后，会触发 finish 事件
     onFinish({ selectedOptions }) {
       this.show = false
-      this.fieldValue = selectedOptions.map(option => option.text).join('/')
+      this.fieldValue = selectedOptions.map(option => option.VAL).join('/')
+      console.log('selectedOptions: ', selectedOptions)
+      this.rz.fwsheng = selectedOptions[0].KEYID
+      this.rz.fwshengval = selectedOptions[0].VAL
+      this.rz.fwshi = selectedOptions[1].KEYID
+      this.rz.fwshival = selectedOptions[1].VAL
     },
     // 选择器确认 房屋类型
     onConfirmHouseType(e) {

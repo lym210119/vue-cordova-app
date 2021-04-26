@@ -31,37 +31,69 @@
           <CreditInfo :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="贷款信息" name="18">
-          <Loans :rz="rz" :cus="cus"/>
+          <Loans :rz="rz" :cus="cus" />
         </van-collapse-item>
 
-        <van-collapse-item title="房产信息" name="4" v-show="rz.intoType === '1'">
+        <van-collapse-item
+          title="房产信息"
+          name="4"
+          v-show="rz.intoType === '1'"
+        >
           <HouseInfo :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="保单信息" name="5" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="保单信息"
+          name="5"
+          v-show="rz.intoType === '2'"
+        >
           <BaoDan :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="车产信息" name="6" v-show="rz.intoType === '3'">
+        <van-collapse-item
+          title="车产信息"
+          name="6"
+          v-show="rz.intoType === '3'"
+        >
           <CarInfo :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="公积金" name="7" v-show="rz.intoType === '2'">
           <GongJiJin :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="社保信息" name="8" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="社保信息"
+          name="8"
+          v-show="rz.intoType === '2'"
+        >
           <SheBao :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="打卡工资" name="9" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="打卡工资"
+          name="9"
+          v-show="rz.intoType === '2'"
+        >
           <Wage :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="微粒贷" name="10" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="微粒贷"
+          name="10"
+          v-show="rz.intoType === '2'"
+        >
           <WeiLiDai :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="信用卡" name="11" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="信用卡"
+          name="11"
+          v-show="rz.intoType === '2'"
+        >
           <CreditCard :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="学历" name="12" v-show="rz.intoType === '2'">
           <Education :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="装修贷" name="13" v-show="rz.intoType === '2'">
+        <van-collapse-item
+          title="装修贷"
+          name="13"
+          v-show="rz.intoType === '2'"
+        >
           <ZhuangXiu :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="税贷" name="14" v-show="rz.intoType === '4'">
@@ -229,7 +261,7 @@ export default {
     Upload,
     Rating,
     XieYi,
-    Loans
+    Loans,
   },
   watch: {
     // 监听数据的变化输出 newV 改变的值，oldV 改变之前的值
@@ -264,7 +296,6 @@ export default {
     if (!this.rz.qmurl) {
       this.rz.qmurl = ''
     }
-    console.log('this.rz222: ', this.rz)
   },
   mounted() {
     // this.onLoad()
@@ -330,7 +361,7 @@ export default {
         xiahu: '请选择单位能否下户',
         zuoji: '请选择单位座机',
         // propertyStatus: "请选择产权情况",
-        hasCar: '请选择是否有车',
+        // hasCar: '请选择是否有车',
       }
 
       return new Promise(resolve => {
@@ -366,26 +397,26 @@ export default {
             return
           }
         }
-        if (formdata.hasCar === '1') {
-          var anjie = Boolean(
-            formdata.ajcpaizhao &&
-              formdata.ajcyuegong &&
-              formdata.ajchuankuan &&
-              formdata.ajcjine,
-          )
-          var quankuan = Boolean(
-            formdata.qkcpaizhao &&
-              formdata.qkczongjia &&
-              formdata.qkcnianxian &&
-              formdata.qkcdengji,
-          )
-          console.log(anjie)
-          console.log(quankuan)
-          if (!anjie && !quankuan) {
-            this.$toast.fail('请填写完整全款车或按揭车')
-            return
-          }
-        }
+        // if (formdata.hasCar === '1') {
+        //   var anjie = Boolean(
+        //     formdata.ajcpaizhao &&
+        //       formdata.ajcyuegong &&
+        //       formdata.ajchuankuan &&
+        //       formdata.ajcjine,
+        //   )
+        //   var quankuan = Boolean(
+        //     formdata.qkcpaizhao &&
+        //       formdata.qkczongjia &&
+        //       formdata.qkcnianxian &&
+        //       formdata.qkcdengji,
+        //   )
+        //   console.log(anjie)
+        //   console.log(quankuan)
+        //   if (!anjie && !quankuan) {
+        //     this.$toast.fail('请填写完整全款车或按揭车')
+        //     return
+        //   }
+        // }
         const arr = Object.keys(formdata)
           .filter(v => v.includes('contact'))
           .filter(v => v.includes('TEL'))

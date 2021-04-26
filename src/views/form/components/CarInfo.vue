@@ -1,6 +1,6 @@
 <template>
   <div class="car-info">
-    <van-field name="hasCar" label="是否有车" required>
+    <van-field name="hasCar" label="是否有车">
       <template #input>
         <van-radio-group v-model="rz.hasCar" direction="horizontal">
           <van-radio name="1">是</van-radio>

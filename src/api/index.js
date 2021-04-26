@@ -45,6 +45,14 @@ export function getCusDetail(data) {
     data,
   })
 }
+// 地区
+export function getAllAreaInfo(data) {
+  return request({
+    url: '/erp/Api/getAllAreaInfo',
+    method: 'post',
+    data,
+  })
+}
 
 // 提交融资
 export function submitInfo(data) {
@@ -106,3 +114,5 @@ export function mergeRequest(data) {
 // submitClientRate(data) {
 //   return minRequest.post("/erp/api/saveCusAccept", data);
 // },
+
+
