@@ -96,7 +96,11 @@
         >
           <ZhuangXiu :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="税贷" name="14" v-show="rz.intoType === '4' || rz.intoType === '2'">
+        <van-collapse-item
+          title="税贷"
+          name="14"
+          v-show="rz.intoType === '4' || rz.intoType === '2'"
+        >
           <TaxLoan :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="添加联系人" name="15">
@@ -293,6 +297,7 @@ export default {
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
+    console.log('this.rz111: ', this.rz);
     if (!this.rz.qmurl) {
       this.rz.qmurl = ''
     }
@@ -468,7 +473,7 @@ export default {
             e[v] = ''
           }
         })
-        console.log('e: ', e)
+        console.log('e-onSubmit: ', e)
 
         this.uploadSignature(e)
       })
@@ -509,8 +514,9 @@ export default {
               if (res2.code == 100) {
                 this.xydemo = false
                 this.$toast.success('提交成功')
-                e.qmurl = res1.url + '|' + res2.url
                 console.log('e: ', e)
+                e.qmurl += res1.url + '|' + res2.url
+
                 this.submitFormData(e)
               }
             })
