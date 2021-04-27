@@ -57,7 +57,7 @@
       type="number"
       label="法人占股比例"
       placeholder="法人占股比例(%)"
-      maxlength="20"
+      maxlength="3"
     />
     <van-field name="zhizhaoyouguansi" label="营业执照名下是否有官司" autofocus>
       <template #input>

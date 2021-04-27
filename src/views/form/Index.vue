@@ -37,7 +37,7 @@
         <van-collapse-item
           title="房产信息"
           name="4"
-          v-show="rz.intoType === '1'"
+          v-show="rz.intoType === '1' || rz.intoType === '2'"
         >
           <HouseInfo :rz="rz" />
         </van-collapse-item>
@@ -51,7 +51,7 @@
         <van-collapse-item
           title="车产信息"
           name="6"
-          v-show="rz.intoType === '3'"
+          v-show="rz.intoType === '3' || rz.intoType === '2'"
         >
           <CarInfo :rz="rz" />
         </van-collapse-item>
@@ -96,7 +96,7 @@
         >
           <ZhuangXiu :rz="rz" />
         </van-collapse-item>
-        <van-collapse-item title="税贷" name="14" v-show="rz.intoType === '4'">
+        <van-collapse-item title="税贷" name="14" v-show="rz.intoType === '4' || rz.intoType === '2'">
           <TaxLoan :rz="rz" />
         </van-collapse-item>
         <van-collapse-item title="添加联系人" name="15">

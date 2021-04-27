@@ -1,6 +1,7 @@
 <template>
   <div class="house-info">
     <van-field
+      v-show="false"
       v-model="fieldValue"
       is-link
       readonly
