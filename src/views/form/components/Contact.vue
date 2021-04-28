@@ -2,8 +2,12 @@
   <div class="contact">
     <div class="contact-item" v-for="(item, i) in contactArr" :key="i">
       <div class="my-section">
-        <span>联系人 </span>
-        <van-tag round type="primary">{{ i + 1 }}</van-tag>
+        <div>
+          <span>联系人 </span>
+          <van-tag round type="primary">{{ i + 1 }}</van-tag>
+
+        </div>
+        <van-icon name="cross" @click="removeContact(i)" />
       </div>
       <van-field
         v-model="item.name"
@@ -57,6 +61,9 @@ export default {
     }
   },
   methods: {
+    removeContact(index) {
+      this.contactArr.splice(index, 1)
+    },
     vilidPhoneNum(tel) {
       console.log('tel: ', tel)
     },
@@ -77,6 +84,9 @@ export default {
 
 <style lang="scss" scoped>
 .my-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0;
   padding: 16px;
   color: #1989fa;
