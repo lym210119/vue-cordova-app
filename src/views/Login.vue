@@ -140,7 +140,7 @@ export default {
           if (res.code === 1) {
             let userInfo = res.info
             userInfo.compid = res.compid
-
+            userInfo.compName = res.compName
             // 调用 Vuex
             this.$store.dispatch('login', userInfo).then(() => {
               this.$toast.success({
@@ -167,6 +167,7 @@ export default {
       })
     },
     onSelect(action) {
+      console.log('action: ', action)
       let formData = new FormData()
       formData.append('compid', action.id)
       formData.append('username', this.username)
@@ -176,6 +177,8 @@ export default {
         console.log('res: ', res)
         let userInfo = res.info
         userInfo.compid = action.id
+        userInfo.compName = action.name
+        console.log('userInfo: ', userInfo)
         this.$store.dispatch('login', userInfo).then(() => {
           this.$toast.success({
             message: res.msg,

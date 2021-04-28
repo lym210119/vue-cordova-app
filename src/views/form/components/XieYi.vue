@@ -62,11 +62,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      comName: state => state.userInfo.compName,
+    }),
+  },
   data() {
-    return {
-      comName: '申贷网',
-    }
+    return {}
   },
 }
 </script>
