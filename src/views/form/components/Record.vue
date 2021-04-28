@@ -119,12 +119,12 @@ export default {
           console.log(5666)
           console.log(dirEntry)
           dirEntry.file(file => {
-            const fileReader = new FileReader()
-            fileReader.onloadend = function() {
-              fileReader.readAsArrayBuffer(file)
-              console.log('file: ', file);
-              console.log(file)
-            }
+            // const fileReader = new FileReader()
+            // fileReader.onloadend = function() {
+            //   fileReader.readAsArrayBuffer(file)
+            //   console.log('file: ', file);
+            //   console.log(file)
+            // }
             this.uploadFileFn(file)
           })
           // var isAppend = true
