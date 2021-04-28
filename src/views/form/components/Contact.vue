@@ -20,6 +20,7 @@
         label="联系人电话"
         placeholder="联系人电话"
         maxlength="11"
+        :rules="[{ pattern, message: '无效的手机号' }]"
       />
     </div>
     <div style="margin: 16px; text-align: center;">
@@ -56,6 +57,9 @@ export default {
     }
   },
   methods: {
+    vilidPhoneNum(tel) {
+      console.log('tel: ', tel)
+    },
     add() {
       if (this.contactArr.length >= 5) {
         this.$toast.fail('最多添加5个联系人')
