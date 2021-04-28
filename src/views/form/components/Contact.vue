@@ -7,7 +7,7 @@
           <van-tag round type="primary">{{ i + 1 }}</van-tag>
 
         </div>
-        <van-icon name="cross" @click="removeContact(i)" />
+        <van-icon name="cross" @click="removeContact(i)" color="#ee0a24" />
       </div>
       <van-field
         v-model="item.name"
