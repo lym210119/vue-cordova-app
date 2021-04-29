@@ -33,6 +33,7 @@
     />
 
     <van-field
+      class="input-readonly"
       v-model="rz.age"
       name="age"
       type="digit"
@@ -42,6 +43,7 @@
       autofocus
       maxlength="2"
       ref="age"
+      disabled
     />
 
     <van-field name="hyzk" label="婚姻状况" required autofocus>
@@ -105,8 +107,6 @@
       </template>
     </van-field>
 
-
-
     <van-field name="iszhixi" label="直系亲属可否知晓贷款" required autofocus>
       <template #input>
         <van-radio-group v-model="rz.iszhixi" direction="horizontal">
@@ -134,7 +134,6 @@ export default {
     return {
       pattern: /(^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(^\d{6}(18|19|20)\d{2}(0[1-9]|10|11|12)([0-2]\d|30|31)\d{3}(\d|X|x)$)/,
       gender: '',
-      
     }
   },
   created() {
@@ -143,9 +142,7 @@ export default {
       this.gender = this.cus.sexid === '先生' ? '1' : '2'
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     // 身份证失去焦点时 自动计算出年龄出生
     onInputIDCard() {

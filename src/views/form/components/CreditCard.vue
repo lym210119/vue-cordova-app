@@ -25,7 +25,7 @@
       label="使用比例"
       placeholder="使用比例(%)"
       maxlength="20"
-      readonly
+      disabled
     />
     <van-field name="ifCashOut" label="是否套现过" autofocus>
       <template #input>
