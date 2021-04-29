@@ -7,6 +7,7 @@
       label="授信总额"
       placeholder="授信总额(元)"
       maxlength="20"
+      @blur="calcUseRatio"
     />
     <van-field
       v-model="rz.xykshiyong"
@@ -15,6 +16,7 @@
       label="已使用"
       placeholder="已使用(元)"
       maxlength="20"
+      @blur="calcUseRatio"
     />
     <van-field
       v-model="rz.useRatio"
@@ -23,6 +25,7 @@
       label="使用比例"
       placeholder="使用比例(%)"
       maxlength="20"
+      readonly
     />
     <van-field name="ifCashOut" label="是否套现过" autofocus>
       <template #input>
@@ -41,6 +44,15 @@ export default {
     rz: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    calcUseRatio() {
+      if (this.rz.xykjine && this.rz.xykshiyong) {
+        this.rz.useRatio = parseInt(
+          (this.rz.xykshiyong / this.rz.xykjine) * 100,
+        )
+      }
     },
   },
 }
