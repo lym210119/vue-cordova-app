@@ -298,7 +298,7 @@ export default {
 
       signatureData: '',
       xydemo: false,
-      endTalkBtn: true,
+      endTalkBtn: false,
       // showActions: false,
       // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
@@ -342,7 +342,8 @@ export default {
     //   }
     // },
     onEndTalk() {
-      this.endTalkBtn = false
+      this.endTalkBtn = true
+      console.log('this.endTalkBtn: ', this.endTalkBtn);
       // this.showActions = true
       this.$refs.record.stop(false)
     },
