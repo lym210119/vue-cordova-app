@@ -176,7 +176,7 @@
             native-type="button"
             color="linear-gradient(to right, #ff6034, #ee0a24)"
             @click="onEndTalk"
-            disabled="endTalkBtn"
+            :disabled="endTalkBtn"
           >
             结束谈单
           </van-button>
