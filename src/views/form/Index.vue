@@ -176,6 +176,7 @@
             native-type="button"
             color="linear-gradient(to right, #ff6034, #ee0a24)"
             @click="onEndTalk"
+            disabled="endTalkBtn"
           >
             结束谈单
           </van-button>
@@ -297,6 +298,7 @@ export default {
 
       signatureData: '',
       xydemo: false,
+      endTalkBtn: true,
       // showActions: false,
       // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
@@ -340,6 +342,7 @@ export default {
     //   }
     // },
     onEndTalk() {
+      this.endTalkBtn = false
       // this.showActions = true
       this.$refs.record.stop(false)
     },
