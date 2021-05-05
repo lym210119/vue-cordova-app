@@ -157,6 +157,8 @@
           block
           type="info"
           native-type="submit"
+          :loading="submitDisabled"
+          :disabled="submitDisabled"
           v-if="!isSubmit"
         >
           提交
@@ -299,6 +301,7 @@ export default {
       signatureData: '',
       xydemo: false,
       endTalkBtn: false,
+      submitDisabled: false,
       // showActions: false,
       // actions: [{ name: '已签单' }, { name: '未签单' }],
     }
@@ -306,7 +309,7 @@ export default {
   created() {
     this.cus = this.$route.query.cus
     this.rz = this.$route.query.rz
-    console.log('this.rz111: ', this.rz);
+    console.log('this.rz111: ', this.rz)
     if (!this.rz.qmurl) {
       this.rz.qmurl = ''
     }
@@ -343,7 +346,7 @@ export default {
     // },
     onEndTalk() {
       this.endTalkBtn = true
-      console.log('this.endTalkBtn: ', this.endTalkBtn);
+      console.log('this.endTalkBtn: ', this.endTalkBtn)
       // this.showActions = true
       this.$refs.record.stop(false)
     },
@@ -465,6 +468,7 @@ export default {
 
     //提交表单
     onSubmit(e) {
+      this.submitDisabled = true
       e.smallLoanNum = 0
       Object.keys(e).map(v => {
         if (v.includes('ifOrganization') && e[v] === '2') {
@@ -544,6 +548,7 @@ export default {
 
           this.score = res.score
           this.isSubmit = true
+          this.submitDisabled = false
         }
       })
     },
