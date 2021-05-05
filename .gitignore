@@ -35,5 +35,5 @@ resources/windows/splash
 
 # apk
 app-release-unsigned.apk
-jintan.apk
+name.apk
 name.keystore
