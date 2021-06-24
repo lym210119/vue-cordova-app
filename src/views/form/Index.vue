@@ -361,6 +361,7 @@ export default {
           }
         }
         if (formdata.hasCar === '1') {
+          console.log('formdata: ', formdata);
           var anjie = Boolean(
             formdata.ajcpaizhao &&
               formdata.ajcyuegong &&
@@ -370,7 +371,7 @@ export default {
           var quankuan = Boolean(
             formdata.qkcpaizhao &&
               formdata.qkczongjia &&
-              formdata.qkcnianxian &&
+              // formdata.qkcnianxian &&
               formdata.qkcdengji,
           )
           console.log(anjie)
