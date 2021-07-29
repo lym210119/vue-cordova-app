@@ -6,7 +6,7 @@
     </p>
     <h4>一、授权内容</h4>
     <p>
-      授权人（亦称“本人”）同意向武汉融坤金融服务有限公司（以下简称“被授权人”）郑重授权如下：
+      授权人（亦称“本人”）同意向{{ comName }}（以下简称“被授权人”）郑重授权如下：
     </p>
 
     <p>
@@ -62,11 +62,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      comName: state => state.userInfo.compName,
+    }),
+  },
   data() {
-    return {
-      comName: '申贷网',
-    }
+    return {}
   },
 }
 </script>
