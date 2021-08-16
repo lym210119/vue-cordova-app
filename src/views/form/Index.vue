@@ -139,7 +139,7 @@
         </van-collapse-item>
       </van-collapse>
 
-      <div style="margin: 16px;text-align: center;">
+      <div class="form-btn">
         <van-field v-model="cus.KEYID" name="cid" v-show="false" />
         <van-field
           v-model="$store.state.userInfo.userId"
@@ -367,9 +367,6 @@ export default {
         sexid: '请选择客户性别',
         card: '请输入客户身份证号',
         age: '请输入客户年龄',
-        jkedu: '请选择借款额度',
-        intoType: '请选择进件类型',
-        expectDate: '请选择期望到账时间',
         hyzk: '请选择婚姻状况',
         hkd: '请输入户口地',
         isdaikuan: '请选择配偶可否知晓贷款',
@@ -379,6 +376,9 @@ export default {
         xugua: '请选择需挂靠单位',
         xiahu: '请选择单位能否下户',
         zuoji: '请选择单位座机',
+        jkedu: '请选择借款额度',
+        intoType: '请选择进件类型',
+        expectDate: '请选择期望到账时间',
         // propertyStatus: "请选择产权情况",
         // hasCar: '请选择是否有车',
       }
@@ -455,6 +455,7 @@ export default {
           this.$toast('未签字')
           return
         }
+        console.log(1211221);
         resolve()
       })
     },
@@ -468,7 +469,7 @@ export default {
 
     //提交表单
     onSubmit(e) {
-      this.submitDisabled = true
+
       e.smallLoanNum = 0
       Object.keys(e).map(v => {
         if (v.includes('ifOrganization') && e[v] === '2') {
@@ -489,7 +490,7 @@ export default {
           }
         })
         console.log('e-onSubmit: ', e)
-
+        this.submitDisabled = true
         this.uploadSignature(e)
       })
     },
@@ -609,6 +610,19 @@ export default {
     flex: 1;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    padding-bottom: 100px;
+
+    .form-btn {
+      background: #ffffff;
+      padding: 16px;
+      text-align: center;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    }
   }
 
   .btn-group {

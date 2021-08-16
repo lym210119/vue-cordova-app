@@ -6,11 +6,10 @@
       type="text"
       label="客户姓名"
       placeholder="客户姓名"
-      required
       maxlength="6"
       autofocus
     />
-    <van-field name="sexid" label="客户性别" required autofocus>
+    <van-field name="sexid" label="客户性别" autofocus>
       <template #input>
         <van-radio-group v-model="gender" direction="horizontal">
           <van-radio name="1">先生</van-radio>
@@ -25,10 +24,8 @@
       type="text"
       label="身份证号"
       placeholder="身份证号"
-      required
       autofocus
       maxlength="18"
-      :rules="[{ pattern, message: '身份证号不正确' }]"
       @input="onInputIDCard"
     />
 
@@ -39,7 +36,6 @@
       type="digit"
       label="年龄"
       placeholder="年龄"
-      required
       autofocus
       maxlength="2"
       ref="age"
