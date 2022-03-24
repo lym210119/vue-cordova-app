@@ -409,6 +409,8 @@ export default {
       })
     },
     showServiceAgreement() {
+      const { data } = this.$refs.signaturePad.saveSignature()
+      this.signatureData = data
       this.showXY = true
     },
     // 清空画板
