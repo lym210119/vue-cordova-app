@@ -167,6 +167,7 @@ export default {
       })
     },
     onSelect(action) {
+      console.log('action: ', action);
       let formData = new FormData()
       formData.append('compid', action.id)
       formData.append('username', this.username)
@@ -176,6 +177,7 @@ export default {
         console.log('res: ', res)
         let userInfo = res.info
         userInfo.compid = action.id
+        userInfo.compName = action.name
         this.$store.dispatch('login', userInfo).then(() => {
           this.$toast.success({
             message: res.msg,

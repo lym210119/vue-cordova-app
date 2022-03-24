@@ -9,6 +9,7 @@ const store = new Vuex.Store({
       userName: '',
       userId: '',
       compid: '',
+      compName: '',
     },
     hasLogin: false,
     baseURL: 'https://jyw.jinchen.cc',
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
       state.userInfo.userName = provider.username
       state.userInfo.userId = provider.userid
       state.userInfo.compid = provider.compid
+      state.userInfo.compName = provider.compName
       localStorage.setItem('store', JSON.stringify(state))
     },
     LOGOUT: state => {
