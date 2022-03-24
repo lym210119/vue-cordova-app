@@ -202,6 +202,8 @@ import XieYi from './components/XieYi'
 
 import html2canvas from 'html2canvas'
 import { dataURLtoBlob } from '../../utils'
+
+import { mapState } from 'vuex'
 export default {
   name: 'Form',
   components: {
@@ -234,6 +236,11 @@ export default {
       console.log('newV, oldV: ', newV.CNAME, oldV.CNAME)
     },
   },
+  computed: {
+    ...mapState({
+      companyName: state => state.userInfo.compName,
+    }),
+  },
   data() {
     return {
       navBarHeight: 46,
@@ -245,7 +252,6 @@ export default {
       score: {},
 
       showXY: false,
-      companyName: '申贷网',
       signatureData: '',
       xydemo: false,
       // showActions: false,
