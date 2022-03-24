@@ -31,7 +31,7 @@ export default {
   computed: {
     fileName() {
       // return new Date().getTime() + '.aac'
-      return new Date().getTime() + '.aac'
+      return this.formatTimeNow() + '.aac'
     },
     filePath() {
       if (this.$device) {
@@ -54,6 +54,19 @@ export default {
     this.record()
   },
   methods: {
+    formatTimeNow() {
+      var date = new Date(),
+        Y = date.getFullYear(),
+        M =
+          date.getMonth() + 1 < 10
+            ? '0' + (date.getMonth() + 1)
+            : date.getMonth() + 1,
+        D = date.getDate(),
+        h = date.getHours(),
+        m = date.getMinutes(),
+        s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
     mediaSuccess() {
       console.log('Media成功12')
     },
