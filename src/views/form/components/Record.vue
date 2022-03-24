@@ -31,7 +31,7 @@ export default {
   computed: {
     fileName() {
       // return new Date().getTime() + '.aac'
-      return new Date().getTime() + '.aac'
+      return this.formatTimeNow() + '.aac'
     },
     filePath() {
       if (this.$device) {
@@ -54,6 +54,19 @@ export default {
     this.record()
   },
   methods: {
+    formatTimeNow() {
+      var date = new Date(),
+        Y = date.getFullYear(),
+        M =
+          date.getMonth() + 1 < 10
+            ? '0' + (date.getMonth() + 1)
+            : date.getMonth() + 1,
+        D = date.getDate(),
+        h = date.getHours(),
+        m = date.getMinutes(),
+        s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
     mediaSuccess() {
       console.log('Media成功12')
     },
@@ -65,7 +78,11 @@ export default {
       console.log(this.fullPath)
       const src = this.fullPath.replace('file:///', 'cdvfile://')
       console.log('src: ', src)
-      this.mediaRec = new this.$Media(this.fullPath, this.mediaSuccess, this.mediaError)
+      this.mediaRec = new this.$Media(
+        this.fullPath,
+        this.mediaSuccess,
+        this.mediaError,
+      )
       // 启动录制音频
       this.mediaRec.startRecord()
     },
@@ -113,6 +130,7 @@ export default {
       console.log(this.fullPath)
       window.resolveLocalFileSystemURL(
         this.fullPath,
+        // this.filePath + '1629180584057.aac',
         dirEntry => {
           console.log(5666)
           console.log(dirEntry)
@@ -134,6 +152,18 @@ export default {
       )
     },
     uploadFileFn(file) {
+      console.log('file: ', file)
+      const MAX_SIZE = 1000 * 1000 * 100
+      if (file.size > MAX_SIZE) {
+        this.$toast({
+          type: 'fail',
+          message: '上传失败，录音时间过长！',
+          onClose: () => {
+            this.$router.push('/')
+          },
+        })
+        return
+      }
       var options = new this.$FileUploadOptions()
       options.fileKey = 'file'
       options.fileName = file.name
