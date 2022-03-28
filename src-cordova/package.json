@@ -19,7 +19,7 @@
     "cordova-plugin-media": "^5.0.3"
   },
   "devDependencies": {
-    "cordova-android": "^9.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-android-permissions": "^1.1.0",

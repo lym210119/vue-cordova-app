@@ -39,7 +39,7 @@ export default {
         if (this.$device.platform === 'iOS') {
           return this.$cordova.file.tempDirectory
         } else {
-          return this.$cordova.file.externalRootDirectory
+          return this.$cordova.file.dataDirectory
         }
       } else {
         return ''
@@ -76,8 +76,8 @@ export default {
     record() {
       this.$toast('开始录音')
       console.log(this.fullPath)
-      const src = this.fullPath.replace('file:///', 'cdvfile://')
-      console.log('src: ', src)
+      // const src = this.fullPath.replace('file:///', 'cdvfile://')
+      // console.log('src: ', src)
       this.mediaRec = new this.$Media(this.fullPath, this.mediaSuccess, this.mediaError)
       // 启动录制音频
       this.mediaRec.startRecord()
@@ -124,6 +124,7 @@ export default {
 
     upload() {
       console.log(this.fullPath)
+      console.log('this.fullPath: ', this.fullPath)
       window.resolveLocalFileSystemURL(
         this.fullPath,
         dirEntry => {
